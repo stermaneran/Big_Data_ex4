@@ -42,6 +42,10 @@ app.use(function(err, req, res, next) {
 
 
 
+var myLessCompiler = require("./tools/less_compiler");
+myLessCompiler();
+
+
 
 var mongoDB = 'mongodb+srv://damir:damiri@cluster0-5kimc.mongodb.net/test?retryWrites=true';
 mongoose.connect(mongoDB, {
@@ -61,8 +65,12 @@ var csvheaders ={
         headers:['String']
     }
 };
+ load_data.importFile('guns2.csv', csvheaders, 'Stat');
 
-load_data.importFile('guns.csv', csvheaders, 'Stat');
+
+// uploads all data!!!
+//     do not remove
+// load_data.importFile('guns.csv', csvheaders, 'Stat');
 
 
 app.listen(3000,function () {

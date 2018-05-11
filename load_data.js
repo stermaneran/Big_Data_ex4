@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
     , csv = require('fast-csv');
-var Stats = require('./schemas/stat');
+var MinistatSchema = require('./schemas/minStat');
 
 
 module.exports.importFile = function(filePath, fileHeaders, modelName) {
@@ -38,7 +38,7 @@ module.exports.importFile = function(filePath, fileHeaders, modelName) {
             // });
 
 
-            var curr = new Stats({
+            var curr = new MinistatSchema({
                 number: number,
                 year: year,
                 month: month,
