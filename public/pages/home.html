@@ -26,14 +26,81 @@
             <div class="name-div row">
                 <div class="text col-3">Gender (M/F):</div>
 
-                <input class="col-5" type="text" name="age" ng-model="entry.gender">
+                <input class="col-5" type="text" name="age" ng-model="entry.sex">
 
             </div>
 
-            <button ng-disabled="!entry.gender" ng-click="searchByGender()">Search</button>
+            <button ng-disabled="!entry.sex" ng-click="searchBySex()">Search</button>
 
             <!--</div>-->
         </form>
+
+        <form class="form-horizontal" role="form" name="queryform">
+            <div class="sign-up">Query by age range</div>
+            <br>
+            <!--<div class="row">-->
+            <div class="name-div row">
+                <div class="text col-4">Age:</div>
+
+                <input class="col-2" type="number" name="age" ng-model="entry.minage">
+                -
+                <input class="col-2" type="number" name="age" ng-model="entry.maxage">
+
+            </div>
+
+            <button ng-disabled="!entry.sex" ng-click="searchAgeRange()">Search</button>
+
+            <!--</div>-->
+        </form>
+
+    </div>
+
+    <div class="data-result" ng-repeat="res in ans" ng-if="ans.length > 0">
+
+        <div class="res-num">{{res.number}}</div>
+        <div class="res-num">{{res.number}}</div>
+
+    </div>
+
+
+    <div class="containter">
+        <table class="table table-hover" ng-if="result.length > 0">
+            <thead>
+            <tr>
+                <th>Number</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Intent</th>
+                <th>Police</th>
+                <th>Sex</th>
+                <th>Age</th>
+                <th>Race</th>
+                <th>Hispanic</th>
+                <th>Place</th>
+                <th>Education</th>
+
+            </tr>
+            </thead>
+            <tbody class="ans-table-body">
+            <tr ng-repeat="res in result">
+                <td scope="row">{{res.number}}</td>
+                <td scope="row">{{res.year}}</td>
+                <td scope="row">{{res.month}}</td>
+                <td scope="row">{{res.intent}}</td>
+                <td scope="row">{{res.police}}</td>
+                <td scope="row">{{res.sex}}</td>
+                <td scope="row">{{res.age}}</td>
+                <td scope="row">{{res.race}}</td>
+                <td scope="row">{{res.hispanic}}</td>
+                <td scope="row">{{res.place}}</td>
+                <td scope="row">{{res.education}}</td>
+                <td></td>
+
+
+            </tr>
+
+            </tbody>
+        </table>
     </div>
 
 
