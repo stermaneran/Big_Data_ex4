@@ -21,16 +21,10 @@ router.get("/get-by-sex", function (req, res) {
     });
 });
 
-router.get("/get-by-sex-age", function (req, res) {
-    var sex = req.query.sex;
-    var age = req.query.age;
-    miniStat.find({
-        sex:sex,
-        $or:[
-            {age:age},
-            {age:30}
-        ]
-    }, function (err, result) {
+router.get("/get-by-range", function (req, res) {
+    var min = req.query.min;
+    var max = req.query.max;
+    miniStat.find({age: {$lte:max, $gte:min}}, function (err, result) {
         if (err) throw err;
         console.log(result);
         res.status(200).json({ans: result});
