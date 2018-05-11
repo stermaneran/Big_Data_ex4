@@ -12,7 +12,7 @@ wizerApp.controller('homeController', ['$scope', '$http', 'ProfileService', func
 
 
     $scope.searchByGender = function() {
-        $http.get('/queries/get-by-sex?gender=' + $scope.entry.gender)
+        $http.get('/queries/get-by-sex?sex=' + $scope.entry.gender)
             .then(function (data) {
                 console.log(JSON.stringify(data))
             })
