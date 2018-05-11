@@ -1,4 +1,4 @@
-wizerApp.service('AuthService', function($http, AuthToken, $rootScope) {
+BDApp.service('AuthService', function($http, AuthToken, $rootScope) {
 
 
     this.googleLogin = function() {

@@ -1,6 +1,6 @@
-var wizerApp = angular.module('wizerApp', ['ngRoute']);
+var BDApp = angular.module('BDApp', ['ngRoute']);
 
-wizerApp.config(function ($routeProvider, $locationProvider) {
+BDApp.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true, requireBase: false }).hashPrefix('!');
 
     $routeProvider
@@ -19,7 +19,7 @@ wizerApp.config(function ($routeProvider, $locationProvider) {
 
 
 
-wizerApp.factory('AuthInterceptor', function ($window, $q) {
+BDApp.factory('AuthInterceptor', function ($window, $q) {
     return {
         request: function(config) {
             config.headers = config.headers || {};
@@ -40,13 +40,13 @@ wizerApp.factory('AuthInterceptor', function ($window, $q) {
 });
 
 
-wizerApp.config(function ($httpProvider) {
+BDApp.config(function ($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
 });
 
 
 
-wizerApp.config(['$httpProvider', function ($httpProvider) {
+BDApp.config(['$httpProvider', function ($httpProvider) {
     //Reset headers to avoid OPTIONS request (aka preflight)
     $httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.headers.post = {};

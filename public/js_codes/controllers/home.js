@@ -1,4 +1,4 @@
-wizerApp.controller('homeController', ['$scope', '$http', 'ProfileService', function ($scope, $http, ProfileService) {
+BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', function ($scope, $http, ProfileService) {
 
     $scope.entry = {};
     $scope.result = [];

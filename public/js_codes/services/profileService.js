@@ -1,4 +1,4 @@
-wizerApp.service('ProfileService', function ($http) {
+BDApp.service('ProfileService', function ($http) {
 
     this.getByAge = function (age) {
         return $http.get('/queries/get-by-age?age=' + age)
