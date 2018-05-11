@@ -56,16 +56,24 @@ mongoose.connect(mongoDB, {
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error!\n'));
 
-var load_data = require('./load_data');
-var csvheaders ={
-    REGIONS:{
-       headers: ['number', 'year', 'month', 'intent', 'police', 'sex', 'age', 'race', 'hispanic', 'place', 'education']
-    },
-    STATES:{
-        headers:['String']
-    }
-};
- load_data.importFile('guns2.csv', csvheaders, 'Stat');
+
+app.get('*', function(req, res){
+    res.sendFile(path.join(__dirname + "/index.html"));
+});
+
+
+// var load_data = require('./load_data');
+// var csvheaders ={
+//     REGIONS:{
+//        headers: ['number', 'year', 'month', 'intent', 'police', 'sex', 'age', 'race', 'hispanic', 'place', 'education']
+//     },
+//     STATES:{
+//         headers:['String']
+//     }
+// };
+//
+//
+//  load_data.importFile('guns2.csv', csvheaders, 'Stat');
 
 
 // uploads all data!!!
