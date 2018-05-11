@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 mongoose.Promise = require("bluebird");
 
-var indexRouter = require('./routes/index');
+var queries = require('./routes/queries');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
+app.use('/queries', queries);
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
@@ -47,7 +47,8 @@ myLessCompiler();
 
 
 
-var mongoDB = 'mongodb+srv://damir:damiri@cluster0-5kimc.mongodb.net/test?retryWrites=true';
+// var mongoDB = 'mongodb+srv://damir:damiri@cluster0-5kimc.mongodb.net/test?retryWrites=true';
+var mongoDB = 'mongodb://damir:damiri@cluster0-shard-00-00-00hhm.mongodb.net:27017,cluster0-shard-00-01-00hhm.mongodb.net:27017,cluster0-shard-00-02-00hhm.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
 mongoose.connect(mongoDB, {
         // useMongoClient: true
     }
