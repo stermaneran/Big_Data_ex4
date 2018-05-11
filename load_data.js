@@ -3,12 +3,14 @@ var mongoose = require('mongoose')
 var MinistatSchema = require('./schemas/minStat');
 
 
-module.exports.importFile = function(filePath, fileHeaders, modelName) {
+module.exports.importFile = function(filePath, fileHeaders) {
     csv.fromPath(filePath, {headers: fileHeaders})
         .on('data', function(data) {
-
-            var array = [number, year, month, intent, police, sex, age, race, hispanic, place, education];
-
+            for(var i =0; i<data.length;i++){
+                if(data[i]==='NA'){
+                    data[i]=-1;
+                }
+            }
             var number=data[0],
                 year=data[1],
                 month=data[2],
@@ -20,23 +22,6 @@ module.exports.importFile = function(filePath, fileHeaders, modelName) {
                 hispanic=data[8],
                 place=data[9],
                 education=data[10];
-
-            // if(data[6]!="NA") {
-            //     var age = data[6];
-            // }
-            // else{
-            //     var age = data[6];
-            // }
-
-
-
-            // Object.keys(data).forEach(function(key) {
-            //     var val = data[key];
-            //
-            //     if (val !== '')
-            //         obj[key] = val;
-            // });
-
 
             var curr = new MinistatSchema({
                 number: number,
@@ -51,8 +36,6 @@ module.exports.importFile = function(filePath, fileHeaders, modelName) {
                 place:place,
                 education:education
             });
-            // console.log(curr);
-
             curr.save(function (err, entry) {
                 if (err)
                     console.log(err);

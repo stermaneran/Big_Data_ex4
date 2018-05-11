@@ -72,7 +72,7 @@ app.get('/', function(req, res){
 // };
 //
 //
-//  load_data.importFile('guns2.csv', csvheaders, 'Stat');
+//  load_data.importFile('guns2.csv', csvheaders);
 
 
 // uploads all data!!!
