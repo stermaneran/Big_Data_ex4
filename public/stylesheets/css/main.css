@@ -1,6 +1,3 @@
-.edit-profile .clickers {
-  cursor: default;
-}
 .home-page {
   background: rgba(255, 222, 143, 0.22);
   color: gray;
@@ -134,68 +131,4 @@ body {
   border-radius: 6%;
   margin: 10px auto;
   cursor: pointer;
-}
-.profile-page {
-  color: #c2200d;
-}
-.profile-page .tmp-div {
-  margin-top: 5%;
-  margin-left: 15%;
-}
-.profile-page .tmp-div .tmp-header {
-  font-size: 200%;
-}
-.profile-page .tmp-div .tmp-details .tmp-details-title {
-  font-size: 130%;
-}
-.profile-page .left-hand-side .basic-details-and-picture {
-  padding: 7%;
-}
-.profile-page .left-hand-side .basic-details-and-picture .profile-picture-and-name {
-  text-align: center;
-}
-.profile-page .left-hand-side .basic-details-and-picture .profile-picture-and-name .profile-picture {
-  box-shadow: -3px -3px 18px 0px;
-  color: #9f392d;
-}
-.profile-page .left-hand-side .basic-details-and-picture .about-me .about-me-header {
-  text-align: center;
-}
-.profile-page .right-hand-side .about-me {
-  padding: 7%;
-}
-.profile-page .right-hand-side #courses .course-list .single-course {
-  display: block;
-  background-color: #ff66540d;
-  padding: 1%;
-  border-radius: 3%;
-  margin-right: 6%;
-}
-.profile-page .right-hand-side #courses .course-list .single-course .course-header {
-  text-align: center;
-  font-weight: 600;
-  font-size: 7vh;
-}
-.session-page .session-header {
-  text-align: center;
-  margin: 6% 0;
-}
-.session-page .not-connected .not-found-session {
-  text-align: center;
-}
-.session-page .connected-container .session-vid {
-  width: 100%;
-}
-.session-page .connected-container .session-vid .video-div {
-  max-width: 100%;
-}
-.session-page .connected-container .session-info .bs-card {
-  height: 100%;
-}
-.session-page .connected-container .session-info .bs-card .card-body .bs-card-text {
-  padding: 1% 4%;
-}
-.session-page .connected-container .messages-container {
-  height: 400px;
-  overflow-y: scroll;
 }
