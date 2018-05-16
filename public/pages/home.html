@@ -3,24 +3,27 @@
 
     <div class="container">
         <form class="form-horizontal" role="form" name="queryform">
-            <div class="sign-up">Query by age</div>
+            <h1 class="display-4">Query by age</h1>
             <br>
             <!--<div class="row">-->
             <div class="name-div row">
                 <div class="text col-3">Age:</div>
 
                 <input class="col-5" type="text" name="age" ng-model="entry.age">
+                <div class="col-1"></div>
+                <button class="col-2" ng-disabled="!entry.age" ng-click="searchByAge()">Search</button>
+                <div class="col-1"></div>
 
             </div>
-
-            <button ng-disabled="!entry.age" ng-click="searchByAge()">Search</button>
 
             <!--</div>-->
         </form>
 
+        <br><br>
+
 
         <form class="form-horizontal" role="form" name="queryform">
-            <div class="sign-up">Query by gender</div>
+            <h1 class="display-4">Query by gender</h1>
             <br>
             <!--<div class="row">-->
             <div class="name-div row">
@@ -28,15 +31,19 @@
 
                 <input class="col-5" type="text" name="age" ng-model="entry.sex">
 
-            </div>
+                <div class="col-1"></div>
+                <button class="col-2" ng-disabled="!entry.sex" ng-click="searchBySex()">Search</button>
+                <div class="col-1"></div>
 
-            <button ng-disabled="!entry.sex" ng-click="searchBySex()">Search</button>
+            </div>
 
             <!--</div>-->
         </form>
 
+        <br><br>
+
         <form class="form-horizontal" role="form" name="queryform">
-            <div class="sign-up">Query by age range</div>
+            <h1 class="display-4">Query by age range</h1>
             <br>
             <!--<div class="row">-->
             <div class="name-div row">
@@ -46,9 +53,12 @@
                 -
                 <input class="col-2" type="number" name="age" ng-model="entry.maxage">
 
+                <div class="col-1"></div>
+                <button class="col-2" ng-disabled="!entry.minage" ng-click="searchAgeRange()">Search</button>
+                <div class="col-1"></div>
+
             </div>
 
-            <button ng-disabled="!entry.minage" ng-click="searchAgeRange()">Search</button>
 
             <!--</div>-->
         </form>
