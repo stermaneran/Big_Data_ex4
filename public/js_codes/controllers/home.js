@@ -29,8 +29,28 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
                 $scope.result = data.data.ans;
                 // console.log($scope.result);
             })
-    }
+    };
 
+
+
+    $scope.uploadFile = function () {
+
+        var file = $scope.myFile;
+        var uploadUrl = "/upload/post-file";
+        var fd = new FormData();
+        fd.append('recfile', file);
+
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+            .then(function (data) {
+                    console.log("upload success!!!");
+                },
+                function () {
+                    console.log("error!!");
+                });
+    };
 
 
 
