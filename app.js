@@ -1,12 +1,11 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-// var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 mongoose.Promise = require("bluebird");
 
 var queries = require('./routes/queries');
+var uploads = require('./routes/uploadcsv');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -18,27 +17,12 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/queries', queries);
+app.use('/upload', uploads);
 // app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-//
-// // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-//
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
 
 
 
@@ -83,6 +67,38 @@ app.get('/', function(req, res){
 app.listen(3000,function () {
     console.log("listening on 3000");
 });
+
+
+
+
+//
+const fs = require('fs');
+// var hdfs = new (require("node-webhdfs")).WebHDFSClient({ user: process.env.USER, namenode_host: "localhost", namenode_port: 50070 });
+var WebHDFS = require('webhdfs');
+var hdfs = WebHDFS.createClient();
+
+var localFilePath = "/Users/user/WebstormProjects/Big_Data_ex4/guns2.csv";
+var remoteFilePath = "/user/bigdata/guns.csv";
+
+var localFileStream = fs.createReadStream(localFilePath);
+var remoteFileStream = hdfs.createWriteStream(remoteFilePath);
+
+localFileStream.pipe(remoteFileStream);
+
+console.log("opening stream to HDFS");
+
+remoteFileStream.on('error', function onError(err) {
+    // Do something with the error
+    console.log("it failed");
+    console.log(err);
+});
+
+remoteFileStream.on('finish', function onFinish() {
+    // Upload is done
+    console.log("it is done!");
+});
+
+//
 
 
 module.exports = app;
