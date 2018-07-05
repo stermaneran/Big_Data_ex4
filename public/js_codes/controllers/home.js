@@ -36,6 +36,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.uploadFile = function () {
 
         var file = $scope.myFile;
+        console.log("MYFILE = " + $scope.myFile);
         var uploadUrl = "/upload/post-file";
         var fd = new FormData();
         fd.append('recfile', file);
