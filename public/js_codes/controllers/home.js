@@ -3,6 +3,12 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.entry = {};
     $scope.result = [];
 
+    $scope.func = {};
+    $scope.learned = true;
+    $scope.predicted = false;
+    $scope.nanError = true;
+    $scope.prediction = '';
+
     $scope.searchByAge = function() {
         ProfileService.getByAge($scope.entry.age)
             .then(function (data) {
@@ -53,8 +59,48 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
                 });
     };
 
+    $scope.loadCSV = function (filename){
+        ProfileService.loadCSV(filename)
+            .then(function (data) {
+                console.log("The server guy told me: Success loading csv to mongo");
+            }, function (err) {
+                console.log("Error loading csv to mongo");
+            })
+
+    };
 
 
+    $scope.learnDataset = function (filename){
+        ProfileService.learnDataset(filename)
+            .then(function (data) {
+                console.log("data = " + JSON.stringify(data));
+                $scope.func.m = data.data.m;
+                $scope.func.n = data.data.n;
+
+                if(data.data.n){
+                    $scope.learned = false;
+                    $scope.nanError=true;
+                }
+                else{
+                    $scope.nanError=false;
+                    $scope.learned = true;
+                }
+            }, function (err) {
+                console.log("Error loading csv to mongo");
+            })
+
+    };
+
+    $scope.predict = function(X) {
+        ProfileService.predict($scope.func.m, $scope.func.n, X)
+            .then(function (data) {
+                console.log("Perdiction: " + JSON.stringify(data));
+                $scope.prediction = data.data.ans;
+                $scope.predicted = true;
+            }, function (err) {
+                console.log("Error predicting");
+            })
+    }
 
 }]);
 
