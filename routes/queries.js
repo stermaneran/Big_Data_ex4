@@ -3,30 +3,34 @@ var router = express.Router();
 var Stat = require("../schemas/stat");
 
 
-router.get("/get-by-age", function (req, res) {
-    var age = req.query.age;
-    Stat.find({age: age}, function (err, result) {
-        if (err) throw err;
-        console.log(result);
-        res.status(200).json({ans: result});
-    });
-});
+router.get("/search", function (req, res) {
 
-router.get("/get-by-sex", function (req, res) {
-    var sex = req.query.sex;
-    Stat.find({sex: sex}, function (err, result) {
-        if (err) throw err;
-        console.log(result);
-        res.status(200).json({ans: result});
-    });
-});
+    let intent = req.query.intent;
+    let sex = req.query.sex;
+    let race = req.query.race;
+    let place = req.query.place;
+    let education = req.query.education;
 
-router.get("/get-by-range", function (req, res) {
-    var min = req.query.min;
-    var max = req.query.max;
-    Stat.find({age: {$lte:max, $gte:min}}, function (err, result) {
+    let query  = {};
+
+    if(intent !== "undefined"){
+        query["intent"] = intent
+    }
+    if(sex !== "undefined"){
+        query["sex"] = sex
+    }
+    if(race !== "undefined"){
+        query["race"] = race
+    }
+    if(place !== "undefined"){
+        query["place"] = place
+    }
+    if(education !== "undefined"){
+        query["education"] = education
+    }
+
+    Stat.find(query, function (err, result) {
         if (err) throw err;
-        console.log(result);
         res.status(200).json({ans: result});
     });
 });
