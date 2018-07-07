@@ -77,17 +77,17 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
         ProfileService.learnDataset(filename)
             .then(function (data) {
                 console.log("data = " + JSON.stringify(data));
-                $scope.func.m = data.data.m;
-                $scope.func.n = data.data.n;
-
-                if(data.data.n){
-                    $scope.learned = false;
-                    $scope.nanError=true;
-                }
-                else{
-                    $scope.nanError=false;
-                    $scope.learned = true;
-                }
+                // $scope.func.m = data.data.m;
+                // $scope.func.n = data.data.n;
+                //
+                // if(data.data.n){
+                //     $scope.learned = false;
+                //     $scope.nanError=true;
+                // }
+                // else{
+                //     $scope.nanError=false;
+                //     $scope.learned = true;
+                // }
             }, function (err) {
                 console.log("Error loading csv to mongo");
             })

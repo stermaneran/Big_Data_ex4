@@ -4,14 +4,14 @@
     <div class="container">
 
 
-
+        <br><br>
         <div class="row upload-file-container">
 
             <div class="col-2"></div>
             <div class="col-4">
 
                 <label class="upload-file-label rad-button warning">
-                    <span class="upload-text">Choose file</span>
+                    <!--<span class="upload-text">Choose file</span>-->
                     <input style="" type="file" name='recfile' file-model="myFile"/>
                 </label>
 
@@ -28,17 +28,19 @@
 
 
 
+        <hr>
         <form class="form-horizontal" role="form" name="queryform">
-            <h1 class="display-4">Load file to mongo</h1>
+            <h3 class="">Load file to mongo</h3>
             <br>
             <!--<div class="row">-->
             <div class="name-div row">
                 <div class="text col-3">File name:</div>
 
                 <input class="col-5" type="text" name="filename" ng-model="filename">
-                <div class="col-1"></div>
-                <button class="col-2" ng-click="loadCSV(filename)">Tell the serverguy</button>
-                <div class="col-1"></div>
+                <!--<div class="col-1"></div>-->
+                <button class="col-2" ng-click="loadCSV(filename)">Load</button>
+                <button class="col-2" ng-click="learn(filename)">Learn</button>
+                <!--<div class="col-1"></div>-->
 
             </div>
 
@@ -46,7 +48,8 @@
         </form>
 
 
-        <br><br>
+        <hr>
+        <br><br><br>
 
 
         <form class="form-horizontal" role="form" name="queryform">
@@ -91,7 +94,7 @@
 
 
                 <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header ed-drop"
+                    <button class="btn btn-secondary dropdown-toggle dropdown-header education-drop"
                             type="button" id="dropdownMenu3" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         Education
@@ -144,9 +147,14 @@
             <!--</div>-->
         </form>
 
-        <div class="display-4" ng-show="predicted">{{prediction}}</div>
+        <br><br>
+        <div class="row" style="text-align: center;">
+            <h2 class="text-success col-12 display-4" ng-show="predicted"><span class="text-primary ans-div" ng-show="predicted">Prediction:</span> {{prediction}}</h2>
+        </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <hr>
+        <br><br><br><br><br><br>
 
 
 
@@ -155,7 +163,7 @@
             <br>
             <!--<div class="row">-->
             <div class="name-div row">
-                <div class="text col-2">Filters:</div>
+                <div class="text col-1">Filters:</div>
 
 
 
@@ -189,7 +197,7 @@
 
 
                 <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header search-ed-drop"
+                    <button class="btn btn-secondary dropdown-toggle dropdown-header search-education-drop"
                             type="button" id="dropdown3" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         Education
@@ -233,9 +241,9 @@
                 </div>
 
 
-                <div class="col-4"></div>
-                <button class="col-4" ng-click="search()">Search</button>
-                <div class="col-4"></div>
+                <!--<div class="col-4"></div>-->
+                <button class="col-1" ng-click="search()">Search</button>
+                <!--<div class="col-4"></div>-->
 
             </div>
 
