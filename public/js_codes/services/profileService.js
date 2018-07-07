@@ -30,4 +30,39 @@ BDApp.service('ProfileService', function ($http) {
             });
     };
 
+
+    this.loadCSV = function (filename) {
+        return $http.get('/upload/load-to-mongo?name=' + filename)
+            .then(function (data) {
+                return data;
+            })
+            .catch(function () {
+                console.log("Caught error in load-to-mongo");
+            });
+    };
+
+
+    this.learnDataset = function (filename) {
+        return $http.get('/learn/process?name=' + filename)
+            .then(function (data) {
+                return data;
+            })
+            .catch(function () {
+                console.log("Caught error in load-to-mongo");
+            });
+    };
+
+
+    this.predict = function (m, n, x) {
+        return $http.get('/learn/predict?m=' + m + '&n=' + n + '&x=' + x)
+            .then(function (data) {
+                return data;
+            })
+            .catch(function () {
+                console.log("Caught error in predicting");
+            });
+    };
+
+
+
 });
