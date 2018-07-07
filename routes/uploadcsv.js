@@ -27,7 +27,11 @@ router.post('/post-file', type, function (req, res) {
     }
 });
 
-var hdfs = new (require("node-webhdfs")).WebHDFSClient({ user: process.env.USER, namenode_host: "localhost", namenode_port: 50070 });
+var hdfs = new (require("node-webhdfs")).WebHDFSClient({
+    user: process.env.USER,
+    namenode_host: "localhost",
+    namenode_port: 50070
+});
 // var WebHDFS = require('webhdfs');
 // var hdfs = WebHDFS.createClient();
 
@@ -54,5 +58,21 @@ function uploadToHDFS(hdfsFile) {
         console.log("it is done!");
     });
 }
+
+var load_data = require('../load_data');
+router.get('/load-to-mongo', function (req, res) {
+    var csvheaders = {
+        REGIONS: {
+            headers: ['TV', 'Radio', 'Newspaper', 'Sales']
+        },
+        STATES: {
+            headers: ['String']
+        }
+    };
+    // load_data.importFile( "advertising" + ".csv", csvheaders);
+    load_data.importFile( req.query.name + ".csv", csvheaders);
+    res.status(200).json({message:'success'});
+
+});
 
 module.exports = router;

@@ -29,6 +29,63 @@
 
 
         <form class="form-horizontal" role="form" name="queryform">
+            <h1 class="display-4">Load file to mongo</h1>
+            <br>
+            <!--<div class="row">-->
+            <div class="name-div row">
+                <div class="text col-3">File name:</div>
+
+                <input class="col-5" type="text" name="filename" ng-model="filename">
+                <div class="col-1"></div>
+                <button class="col-2" ng-click="loadCSV(filename)">Tell the serverguy</button>
+                <div class="col-1"></div>
+
+            </div>
+
+            <!--</div>-->
+        </form>
+
+
+        <br><br>
+
+
+        <form class="form-horizontal" role="form" name="queryform">
+            <h1 class="display-4">Process & Predict:</h1>
+            <br>
+            <!--<div class="row">-->
+            <div class="name-div row">
+                <div class="text col-3">Learn by field:</div>
+
+                <input class="col-5" type="text" name="field" ng-model="field">
+                <div class="col-1"></div>
+                <button class="col-2" ng-click="learnDataset(field)">Learn</button>
+                <div class="col-1"></div>
+
+            </div>
+
+            <div class="name-div row">
+                <div class="text col-3">Predict ({{field ? field : ""}}):</div>
+
+                <input class="col-3" type="text" name="predx" ng-disabled="learned" ng-model="predx">
+                <div class="col-3" ng-show="!learned && nanError">f(X) = {{func.m}}*X + {{func.n}}</div>
+                <div class="col-3" ng-show="learned && nanError"></div>
+                <div class="col-3 text-danger" ng-show="!nanError">Invalid field</div>
+
+                <button class="col-2" ng-click="predict(predx)">Predict</button>
+                <div class="col-1"></div>
+
+            </div>
+
+            <!--</div>-->
+        </form>
+
+        <div class="display-4" ng-show="predicted">{{prediction}}</div>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+        <form class="form-horizontal" role="form" name="queryform">
             <h1 class="display-4">Query by age</h1>
             <br>
             <!--<div class="row">-->

@@ -1,15 +1,8 @@
 var mongoose = require('mongoose');
 var MinistatSchema = new mongoose.Schema({
-    number: Number,
-    year: Number,
-    month: Number,
-    intent:String,
-    police:Number,
-    sex:String,
-    age:Number,
-    race:String,
-    hispanic:Number,
-    place:String,
-    education:Number
+    TV: Number,
+    Radio: Number,
+    Newspaper: Number,
+    Sales: Number
 });
 module.exports = mongoose.model('Ministats', MinistatSchema);
