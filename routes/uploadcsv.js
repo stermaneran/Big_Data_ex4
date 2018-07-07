@@ -63,7 +63,7 @@ var load_data = require('../load_data');
 router.get('/load-to-mongo', function (req, res) {
     var csvheaders = {
         REGIONS: {
-            headers: ['TV', 'Radio', 'Newspaper', 'Sales']
+            headers: ["intent","sex","race","place","education"]
         },
         STATES: {
             headers: ['String']

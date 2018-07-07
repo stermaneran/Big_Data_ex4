@@ -93,7 +93,8 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
     };
 
-    $scope.predict = function(X) {
+    $scope.predict = function() {
+        console.log("choices = " + JSON.stringify($scope.choices));
         ProfileService.predict($scope.choices)
             .then(function (data) {
                 console.log("Perdiction: " + JSON.stringify(data));
@@ -102,7 +103,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
             }, function (err) {
                 console.log("Error predicting");
             })
-    }
+    };
 
 
 

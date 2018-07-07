@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var miniStat = require("../schemas/minStat");
+var Stat = require("../schemas/stat");
 
 
 router.get("/get-by-age", function (req, res) {
     var age = req.query.age;
-    miniStat.find({age: age}, function (err, result) {
+    Stat.find({age: age}, function (err, result) {
         if (err) throw err;
         console.log(result);
         res.status(200).json({ans: result});
@@ -14,7 +14,7 @@ router.get("/get-by-age", function (req, res) {
 
 router.get("/get-by-sex", function (req, res) {
     var sex = req.query.sex;
-    miniStat.find({sex: sex}, function (err, result) {
+    Stat.find({sex: sex}, function (err, result) {
         if (err) throw err;
         console.log(result);
         res.status(200).json({ans: result});
@@ -24,7 +24,7 @@ router.get("/get-by-sex", function (req, res) {
 router.get("/get-by-range", function (req, res) {
     var min = req.query.min;
     var max = req.query.max;
-    miniStat.find({age: {$lte:max, $gte:min}}, function (err, result) {
+    Stat.find({age: {$lte:max, $gte:min}}, function (err, result) {
         if (err) throw err;
         console.log(result);
         res.status(200).json({ans: result});
