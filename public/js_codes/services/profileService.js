@@ -43,7 +43,7 @@ BDApp.service('ProfileService', function ($http) {
 
 
     this.learnDataset = function (filename) {
-        return $http.get('/learn/process?name=' + filename)
+        return $http.post('/learn/process?name=' + filename)
             .then(function (data) {
                 return data;
             })
