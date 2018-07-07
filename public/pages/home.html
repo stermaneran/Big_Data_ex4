@@ -233,8 +233,9 @@
                 </div>
 
 
-                <button class="col-12" ng-click="search()">Search</button>
-
+                <div class="col-4"></div>
+                <button class="col-4" ng-click="search()">Search</button>
+                <div class="col-4"></div>
 
             </div>
 
@@ -257,14 +258,9 @@
             <thead>
             <tr>
                 <th>Number</th>
-                <th>Year</th>
-                <th>Month</th>
                 <th>Intent</th>
-                <th>Police</th>
                 <th>Sex</th>
-                <th>Age</th>
                 <th>Race</th>
-                <th>Hispanic</th>
                 <th>Place</th>
                 <th>Education</th>
 
@@ -272,15 +268,10 @@
             </thead>
             <tbody class="ans-table-body">
             <tr ng-repeat="res in result">
-                <td scope="row">{{res.number}}</td>
-                <td scope="row">{{res.year}}</td>
-                <td scope="row">{{res.month}}</td>
+                <td scope="row">{{$index}}</td>
                 <td scope="row">{{res.intent}}</td>
-                <td scope="row">{{res.police}}</td>
                 <td scope="row">{{res.sex}}</td>
-                <td scope="row">{{res.age}}</td>
                 <td scope="row">{{res.race}}</td>
-                <td scope="row">{{res.hispanic}}</td>
                 <td scope="row">{{res.place}}</td>
                 <td scope="row">{{res.education}}</td>
                 <td></td>
@@ -291,6 +282,9 @@
             </tbody>
         </table>
     </div>
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 </div>
