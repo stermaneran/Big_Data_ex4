@@ -9,6 +9,8 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.nanError = true;
     $scope.prediction = '';
 
+    $scope.choices = {};
+
     $scope.searchByAge = function() {
         ProfileService.getByAge($scope.entry.age)
             .then(function (data) {
@@ -92,7 +94,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     };
 
     $scope.predict = function(X) {
-        ProfileService.predict($scope.func.m, $scope.func.n, X)
+        ProfileService.predict($scope.choices)
             .then(function (data) {
                 console.log("Perdiction: " + JSON.stringify(data));
                 $scope.prediction = data.data.ans;
@@ -101,6 +103,36 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
                 console.log("Error predicting");
             })
     }
+
+
+
+
+    $scope.intentChoose = function(input) {
+        console.log("Called role choose");
+        $('.intent-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.choices.intent = input;
+    };
+
+
+    $scope.sexChoose = function(input) {
+        console.log("Called role choose");
+        $('.sex-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.choices.sex = input;
+    };
+
+    $scope.edChoose = function(input) {
+        console.log("Called role choose");
+        $('.ed-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.choices.education = input;
+    };
+
+    $scope.placeChoose = function(input) {
+        console.log("Called role choose");
+        $('.place-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.choices.place = input;
+    };
+
+
 
 }]);
 

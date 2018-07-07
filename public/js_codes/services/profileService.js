@@ -53,8 +53,8 @@ BDApp.service('ProfileService', function ($http) {
     };
 
 
-    this.predict = function (m, n, x) {
-        return $http.get('/learn/predict?m=' + m + '&n=' + n + '&x=' + x)
+    this.predict = function (choices) {
+        return $http.post('/learn/predict', choices)
             .then(function (data) {
                 return data;
             })
