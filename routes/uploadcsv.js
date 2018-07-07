@@ -4,6 +4,7 @@ const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 const type = upload.single('recfile');
 const fs = require('fs');
+const path = require('path');
 
 router.post('/post-file', type, function (req, res) {
     if (!req.file) {
@@ -59,20 +60,38 @@ function uploadToHDFS(hdfsFile) {
     });
 }
 
+let firstline = require('firstline');
+
 var load_data = require('../load_data');
 router.get('/load-to-mongo', function (req, res) {
-    var csvheaders = {
-        REGIONS: {
-            headers: ["intent","sex","race","place","education"]
-        },
-        STATES: {
-            headers: ['String']
-        }
-    };
-    // load_data.importFile( "advertising" + ".csv", csvheaders);
-    load_data.importFile( req.query.name + ".csv", csvheaders);
-    res.status(200).json({message:'success'});
 
+
+    // var fs = require('fs'),
+    //     readline = require('readline');
+    //
+    // var rd = readline.createInterface({
+    //     input: fs.createReadStream(path.resolve(req.query.name + ".csv")),
+    //     output: process.stdout,
+    //     console: false
+    // });
+
+    firstline(path.resolve(req.query.name + ".csv")).then(function (line) {
+        if(line.charAt(line.length-1) === '\r'){
+            line =line.substring(0,line.length-1)
+        }
+        let headers = line.split(",");
+            var csvheaders = {
+                REGIONS: {
+                    headers: headers
+                },
+                STATES: {
+                    headers: ['String']
+                }
+            };
+            console.log("uploading " + req.query.name + ".csv");
+            load_data.importFile(path.resolve(req.query.name + ".csv"), csvheaders);
+            res.status(200).json({message:'success'});
+    });
 });
 
 module.exports = router;

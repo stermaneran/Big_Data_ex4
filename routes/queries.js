@@ -5,6 +5,7 @@ var Stat = require("../schemas/stat");
 
 router.get("/search", function (req, res) {
 
+    console.log("searching...");
     let intent = req.query.intent;
     let sex = req.query.sex;
     let race = req.query.race;

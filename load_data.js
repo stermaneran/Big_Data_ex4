@@ -1,13 +1,14 @@
-var mongoose = require('mongoose')
-    , csv = require('fast-csv');
-var Stat = require('./schemas/stat');
+let mongoose = require('mongoose');
+let csv = require('fast-csv');
+let Stat = require('./schemas/stat');
 
 
 module.exports.importFile = function(filePath, fileHeaders) {
     csv.fromPath(filePath, {headers: fileHeaders})
         .on('data', function(data) {
 
-            var curr = new Stat({
+
+            let curr = new Stat({
                 intent: data[0],
                 sex: data[1],
                 race: data[4],
