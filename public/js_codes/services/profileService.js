@@ -54,7 +54,8 @@ BDApp.service('ProfileService', function ($http) {
 
 
     this.predict = function (choices) {
-        return $http.post('/learn/predict', choices)
+        console.log("in service! choices = " + JSON.stringify(choices));
+        return $http.post('/learn/predict?sex=' + choices.sex + '&intent=' + choices.intent + '&education=' + choices.education + '&place=' + choices.place)
             .then(function (data) {
                 return data;
             })
