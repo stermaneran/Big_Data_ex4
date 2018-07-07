@@ -10,6 +10,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.prediction = '';
 
     $scope.choices = {};
+    $scope.searchFilter = {};
 
     $scope.searchByAge = function() {
         ProfileService.getByAge($scope.entry.age)
@@ -107,31 +108,42 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
 
-
-    $scope.intentChoose = function(input) {
-        console.log("Called role choose");
-        $('.intent-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
-        $scope.choices.intent = input;
+    $scope.search = function() {
+        ProfileService.search($scope.searchFilter)
+            .then(function (data) {
+                // console.log(JSON.stringify(data.data.ans));
+                $scope.result = data.data.ans;
+                // console.log($scope.result);
+            })
     };
 
 
-    $scope.sexChoose = function(input) {
+
+
+    $scope.predictChoose = function(input, type) {
         console.log("Called role choose");
-        $('.sex-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
-        $scope.choices.sex = input;
+        $('.' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.choices[type] = input;
     };
 
-    $scope.edChoose = function(input) {
+
+    $scope.searchChoose = function(input, type) {
         console.log("Called role choose");
-        $('.ed-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
-        $scope.choices.education = input;
+        $('.search-' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.searchFilter[type] = input;
     };
 
-    $scope.placeChoose = function(input) {
-        console.log("Called role choose");
-        $('.place-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
-        $scope.choices.place = input;
-    };
+    // $scope.edChoose = function(input) {
+    //     console.log("Called role choose");
+    //     $('.ed-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+    //     $scope.choices.education = input;
+    // };
+    //
+    // $scope.placeChoose = function(input) {
+    //     console.log("Called role choose");
+    //     $('.place-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+    //     $scope.choices.place = input;
+    // };
 
 
 

@@ -66,4 +66,16 @@ BDApp.service('ProfileService', function ($http) {
 
 
 
+    this.search = function (filters) {
+        console.log("in service! choices = " + JSON.stringify(choices));
+        return $http.post('/learn/predict?sex=' + filters.sex + '&intent=' + filters.intent + '&education=' + filters.education + '&place=' + filters.place + '&race=' + filters.race)
+            .then(function (data) {
+                return data;
+            })
+            .catch(function () {
+                console.log("Caught error in predicting");
+            });
+    };
+
+
 });
