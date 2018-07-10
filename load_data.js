@@ -1,31 +1,32 @@
 let mongoose = require('mongoose');
 let csv = require('fast-csv');
 let Stat = require('./schemas/stat');
+let All = require('./schemas/all');
 
 let saved = 0;
-module.exports.importFile = function(filePath, fileHeaders) {
+
+module.exports.importFile = function(name, filePath, fileHeaders) {
+    let entry = [];
     csv.fromPath(filePath, {headers: fileHeaders})
         .on('data', function(data) {
 
 
-            let curr = new Stat({
-                intent: data[0],
-                sex: data[1],
-                race: data[4],
-                place:data[2],
-                education:data[3]
+            let headers = {};
+            fileHeaders.REGIONS.headers.forEach(function (head, i) {
+                headers[head] = data[i];
             });
-            curr.save(function (err) {
-                if (err)
-                    console.log(err);
-            });
+
+            if(headers[fileHeaders.REGIONS.headers[0]] !== fileHeaders.REGIONS.headers[0]){
+                entry.push(headers);
+            }
         })
         .on('end', function() {
-            console.log("done " +saved);
-            saved +=1;
-            if(saved===3999){
-                console.log("all done");
-                fs.unlinkSync(filePath);
-            }
+        let newinput = new All({
+            obj : entry,
+            name : name
+            });
+
+        newinput.save()
+
         });
 };

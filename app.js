@@ -47,4 +47,15 @@ app.listen(3000, function () {
 });
 
 
+var load_data = require('./load_data');
+let csvheaders = {
+    REGIONS: {
+        headers: ['intent',  'sex', 'place', 'education', 'race']
+    },
+    STATES: {
+        headers: ['String']
+    }
+};
+// load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
+
 module.exports = app;

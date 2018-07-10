@@ -75,7 +75,7 @@ router.get('/load-to-mongo', function (req, res) {
                 }
             };
             console.log("uploading " + req.query.name + ".csv");
-            load_data.importFile(path.resolve(req.query.name + ".csv"), csvheaders);
+            load_data.importFile(req.query.name, path.resolve(req.query.name + ".csv"), csvheaders);
             res.status(200).json({message: 'success'});
 
         });
@@ -83,36 +83,6 @@ router.get('/load-to-mongo', function (req, res) {
 });
 
 
-// firstline(path.resolve(req.query.name + ".csv")).then(function (line) {
-//     if(line.charAt(line.length-1) === '\r'){
-//         line =line.substring(0,line.length-1)
-//     }
-//     let headers = line.split(",");
-//     let csvheaders = {
-//         REGIONS: {
-//             headers: headers
-//         },
-//         STATES: {
-//             headers: ['String']
-//         }
-//     };
-//     console.log("uploading " + req.query.name + ".csv");
-//     load_data.importFile(path.resolve(req.query.name + ".csv"), csvheaders);
-//     res.status(200).json({message:'success'});
-//
-// });
-
-
-// let csvheaders = {
-//     REGIONS: {
-//         headers: ["intent", "sex", "race", "place", "education"]
-//     },
-//     STATES: {
-//         headers: ['String']
-//     }
-// };
-// load_data.importFile(path.resolve(req.query.name + ".csv"), csvheaders);
-// res.status(200).json({message: 'success'});
 
 
 module.exports = router;
