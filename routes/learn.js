@@ -6,6 +6,8 @@ const DT = require('../schemas/dt');
 
 router.post("/process",function (req, res) {
 
+    console.log("learning " + req.query.name + ".csv");
+
     Stat.find({},function (err, all) {
         if(err){
             console.log(err);
@@ -36,6 +38,8 @@ router.post("/process",function (req, res) {
 
 
 router.post('/predict',function (req, res) {
+
+    console.log("predicting...");
 
     DT.findOne({},function (err, tree) {
         if(err){

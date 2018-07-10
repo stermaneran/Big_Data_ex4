@@ -47,6 +47,61 @@
 .home-page .welcome-section .search-something .search-input-group {
   margin-top: 5%;
 }
+/*
+ * CSS3 / LESS loader spinner
+*/
+/* Animation */
+.spin {
+  -webkit-animation: spin 750ms infinite linear;
+  -moz-animation: spin 750ms infinite linear;
+  animation: spin 750ms infinite linear;
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+/* Styling */
+.loader {
+  background-color: #eee;
+  border-radius: 100%;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  overflow: hidden;
+}
+.loader .a {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -35% 0 0 -35%;
+  width: 70%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 100%;
+  z-index: 3;
+}
+.loader .b {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.loader .b .c {
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  margin: 0 0 0 -7.5px;
+  height: 14px;
+  width: 15px;
+  background: #378687;
+}
 body {
   background: rgba(255, 222, 143, 0.44);
 }

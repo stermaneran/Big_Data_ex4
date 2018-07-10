@@ -47,32 +47,4 @@ app.listen(3000, function () {
 });
 
 
-//
-//hadoop
-// const fs = require('fs');
-// // var hdfs = new (require("node-webhdfs")).WebHDFSClient({ user: process.env.USER, namenode_host: "localhost", namenode_port: 50070 });
-// var WebHDFS = require('webhdfs');
-// var hdfs = WebHDFS.createClient();
-//
-// var localFilePath = "/Users/user/WebstormProjects/Big_Data_ex4/guns2.csv";
-// var remoteFilePath = "/user/bigdata/guns.csv";
-//
-// var localFileStream = fs.createReadStream(localFilePath);
-// var remoteFileStream = hdfs.createWriteStream(remoteFilePath);
-//
-// localFileStream.pipe(remoteFileStream);
-//
-// console.log("opening stream to HDFS");
-//
-// remoteFileStream.on('error', function onError(err) {
-//     // Do something with the error
-//     console.log("it failed");
-//     console.log(err);
-// });
-//
-// remoteFileStream.on('finish', function onFinish() {
-//     // Upload is done
-//     console.log("it is done!");
-// });
-
 module.exports = app;
