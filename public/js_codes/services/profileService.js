@@ -43,7 +43,7 @@ BDApp.service('ProfileService', function ($http) {
 
 
     this.learnDataset = function (filename) {
-        return $http.get('/learn/process?name=' + filename)
+        return $http.post('/learn/process?name=' + filename)
             .then(function (data) {
                 return data;
             })
@@ -53,8 +53,9 @@ BDApp.service('ProfileService', function ($http) {
     };
 
 
-    this.predict = function (m, n, x) {
-        return $http.get('/learn/predict?m=' + m + '&n=' + n + '&x=' + x)
+    this.predict = function (choices) {
+        console.log("in service! choices = " + JSON.stringify(choices));
+        return $http.post('/learn/predict?sex=' + choices.sex + '&intent=' + choices.intent + '&education=' + choices.education + '&place=' + choices.place)
             .then(function (data) {
                 return data;
             })
@@ -63,6 +64,17 @@ BDApp.service('ProfileService', function ($http) {
             });
     };
 
+
+
+    this.search = function (filters) {
+        return $http.get('/queries/search?sex=' + filters.sex + '&intent=' + filters.intent + '&education=' + filters.education + '&place=' + filters.place + '&race=' + filters.race)
+            .then(function (data) {
+                return data;
+            })
+            .catch(function () {
+                console.log("Caught error in predicting");
+            });
+    };
 
 
 });

@@ -47,104 +47,15 @@ app.listen(3000, function () {
 });
 
 
-//
-//hadoop
-// const fs = require('fs');
-// // var hdfs = new (require("node-webhdfs")).WebHDFSClient({ user: process.env.USER, namenode_host: "localhost", namenode_port: 50070 });
-// var WebHDFS = require('webhdfs');
-// var hdfs = WebHDFS.createClient();
-//
-// var localFilePath = "/Users/user/WebstormProjects/Big_Data_ex4/guns2.csv";
-// var remoteFilePath = "/user/bigdata/guns.csv";
-//
-// var localFileStream = fs.createReadStream(localFilePath);
-// var remoteFileStream = hdfs.createWriteStream(remoteFilePath);
-//
-// localFileStream.pipe(remoteFileStream);
-//
-// console.log("opening stream to HDFS");
-//
-// remoteFileStream.on('error', function onError(err) {
-//     // Do something with the error
-//     console.log("it failed");
-//     console.log(err);
-// });
-//
-// remoteFileStream.on('finish', function onFinish() {
-//     // Upload is done
-//     console.log("it is done!");
-// });
-
-//
-
-
-//
-// machine learning
-
-
-// const ml = require('ml-regression');
-// const csv = require('csvtojson');
-// const SLR = ml.SLR; // Simple Linear Regression
-//
-// const csvFilePath = 'advertising2.csv'; // Data
-// let csvData = [], // parsed Data
-//     X = [], // Input
-//     y = []; // Output
-//
-// let regressionModel;
-//
-// const readline = require('readline'); // For user prompt to allow predictions
-//
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-// });
-//
-//
-// csv()
-//     .fromFile(csvFilePath)
-//     .then(function (jsonObj) { //when parse finished, result will be emitted here.
-//         csvData.push(jsonObj);
-//         dressData(); // To get data points from JSON Objects
-//         performRegression();
-//     })
-//
-// function performRegression() {
-//     regressionModel = new SLR(X, y); // Train the model on training data
-//     console.log(regressionModel.toString(10));
-//     predictOutput();
-// }
-//
-// function dressData() {
-//     /**
-//      * One row of the data object looks like:
-//      * {
-//      *   TV: "10",
-//      *   Radio: "100",
-//      *   Newspaper: "20",
-//      *   "Sales": "1000"
-//      * }
-//      *
-//      * Hence, while adding the data points,
-//      * we need to parse the String value as a Float.
-//      */
-//     csvData[0].forEach((row) => {
-//         X.push(f(row.TV));
-//         y.push(f(row.Sales));
-//     });
-// }
-//
-// function f(s) {
-//     return parseFloat(s);
-// }
-//
-// function predictOutput() {
-//     rl.question('Enter input X for prediction (Press CTRL+C to exit) : ', (answer) => {
-//         console.log(`At X = ${answer}, y =  ${regressionModel.predict(parseFloat(answer))}`);
-//         predictOutput();
-//     });
-// }
-
-//
+var load_data = require('./load_data');
+let csvheaders = {
+    REGIONS: {
+        headers: ['intent',  'sex', 'place', 'education', 'race']
+    },
+    STATES: {
+        headers: ['String']
+    }
+};
+// load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
 
 module.exports = app;

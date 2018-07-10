@@ -9,6 +9,13 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.nanError = true;
     $scope.prediction = '';
 
+    $scope.learningInProgress = false;
+    $scope.predictingInProgress = false;
+    $scope.searchingInProgress = false;
+
+    $scope.choices = {};
+    $scope.searchFilter = {};
+
     $scope.searchByAge = function() {
         ProfileService.getByAge($scope.entry.age)
             .then(function (data) {
@@ -71,36 +78,93 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
     $scope.learnDataset = function (filename){
+        $scope.learningInProgress = true;
         ProfileService.learnDataset(filename)
             .then(function (data) {
                 console.log("data = " + JSON.stringify(data));
-                $scope.func.m = data.data.m;
-                $scope.func.n = data.data.n;
 
-                if(data.data.n){
-                    $scope.learned = false;
-                    $scope.nanError=true;
-                }
-                else{
-                    $scope.nanError=false;
-                    $scope.learned = true;
-                }
+                $scope.learningInProgress = false;
+                // $scope.func.m = data.data.m;
+                // $scope.func.n = data.data.n;
+                //
+                // if(data.data.n){
+                //     $scope.learned = false;
+                //     $scope.nanError=true;
+                // }
+                // else{
+                //     $scope.nanError=false;
+                //     $scope.learned = true;
+                // }
             }, function (err) {
+                $scope.learningInProgress = false;
                 console.log("Error loading csv to mongo");
             })
 
     };
 
-    $scope.predict = function(X) {
-        ProfileService.predict($scope.func.m, $scope.func.n, X)
+    $scope.predict = function() {
+        $scope.predictingInProgress = true;
+
+        console.log("choices = " + JSON.stringify($scope.choices));
+        ProfileService.predict($scope.choices)
             .then(function (data) {
                 console.log("Perdiction: " + JSON.stringify(data));
                 $scope.prediction = data.data.ans;
                 $scope.predicted = true;
+                $scope.predictingInProgress = false;
             }, function (err) {
                 console.log("Error predicting");
+                $scope.predictingInProgress = false;
+
             })
-    }
+    };
+
+
+
+    $scope.search = function() {
+        $scope.searchingInProgress = true;
+
+        ProfileService.search($scope.searchFilter)
+            .then(function (data) {
+                // console.log(JSON.stringify(data.data.ans));
+                $scope.result = data.data.ans;
+                // console.log($scope.result);
+                $scope.searchingInProgress = false;
+            }, function(err) {
+                $scope.searchingInProgress = false;
+
+            })
+    };
+
+
+
+
+    $scope.predictChoose = function(input, type) {
+        console.log("Called role choose");
+        $('.' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.choices[type] = input;
+    };
+
+
+    $scope.searchChoose = function(input, type) {
+        console.log("Called role choose");
+        $('.search-' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.searchFilter[type] = input;
+    };
+
+    // $scope.edChoose = function(input) {
+    //     console.log("Called role choose");
+    //     $('.ed-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+    //     $scope.choices.education = input;
+    // };
+    //
+    // $scope.placeChoose = function(input) {
+    //     console.log("Called role choose");
+    //     $('.place-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+    //     $scope.choices.place = input;
+    // };
+
+
 
 }]);
 

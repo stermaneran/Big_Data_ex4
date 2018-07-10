@@ -4,75 +4,85 @@ const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 const type = upload.single('recfile');
 const fs = require('fs');
+const path = require('path');
 
 router.post('/post-file', type, function (req, res) {
     if (!req.file) {
-        //
-        uploadToHDFS("/Users/user/WebstormProjects/Big_Data_ex4/guns2.csv");
-        //
         console.log("no file");
         res.status(400).json({message: 'no file'});
     }
     else {
-        const path = req.file.path;
+        const filePath = req.file.path;
         if (!req.file.originalname.toLowerCase().match(/\.(csv)$/)) {
-            fs.unlinkSync(path);
+            fs.unlinkSync(filePath);
             res.status(400).json({message: 'wrong file'});
         }
         else {
-            console.log(path);
-            uploadToHDFS(path);
-            fs.unlinkSync(path);
+            let pathToFile = path.resolve(filePath);
+            let newName = path.resolve('upload');
+            fs.rename(pathToFile, newName + "/" + req.file.originalname, function (err) {
+                if (err) console.log('ERROR: ' + err);
+                else {
+                    uploadToHDFS(newName + "/" + req.file.originalname);
+                }
+            });
+
         }
     }
 });
 
-var hdfs = new (require("node-webhdfs")).WebHDFSClient({
-    user: process.env.USER,
-    namenode_host: "localhost",
-    namenode_port: 50070
-});
-// var WebHDFS = require('webhdfs');
-// var hdfs = WebHDFS.createClient();
+
+var exec = require('child_process').exec;
+var child;
 
 function uploadToHDFS(hdfsFile) {
-    console.log("here");
-    var localFilePath = hdfsFile;
-    var remoteFilePath = "/user/bigdata/guns.csv";
 
-    var localFileStream = fs.createReadStream(localFilePath);
-    var remoteFileStream = hdfs.createWriteStream(remoteFilePath);
-
-    localFileStream.pipe(remoteFileStream);
-
-    console.log("opening stream to HDFS");
-
-    remoteFileStream.on('error', function onError(err) {
-        // Do something with the error
-        console.log("it failed");
-        console.log(err);
-    });
-
-    remoteFileStream.on('finish', function onFinish() {
-        // Upload is done
-        console.log("it is done!");
+    child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyFromLocal " + hdfsFile, function (error, stdout, stderr) {
+        if (stdout) {
+            console.log('stdout: ' + stdout);
+        }
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+        fs.unlinkSync(hdfsFile);
     });
 }
 
+let firstline = require('firstline');
+
 var load_data = require('../load_data');
 router.get('/load-to-mongo', function (req, res) {
-    var csvheaders = {
-        REGIONS: {
-            headers: ['TV', 'Radio', 'Newspaper', 'Sales']
-        },
-        STATES: {
-            headers: ['String']
-        }
-    };
-    // load_data.importFile( "advertising" + ".csv", csvheaders);
-    load_data.importFile( req.query.name + ".csv", csvheaders);
-    res.status(200).json({message:'success'});
 
+    child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyToLocal " + req.query.name + ".csv" + " mongotmp", function (error, stdout, stderr) {
+        if (stdout) {
+            console.log('stdout: ' + stdout);
+        }
+        if (error) {
+            console.log('exec error: ' + error);
+        }
+
+        firstline(path.resolve(req.query.name + ".csv")).then(function (line) {
+            if (line.charAt(line.length - 1) === '\r') {
+                line = line.substring(0, line.length - 1)
+            }
+            let headers = line.split(",");
+            let csvheaders = {
+                REGIONS: {
+                    headers: headers
+                },
+                STATES: {
+                    headers: ['String']
+                }
+            };
+            console.log("uploading " + req.query.name + ".csv");
+            load_data.importFile(req.query.name, path.resolve(req.query.name + ".csv"), csvheaders);
+            res.status(200).json({message: 'success'});
+
+        });
+    });
 });
+
+
+
 
 module.exports = router;

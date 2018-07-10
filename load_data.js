@@ -1,29 +1,32 @@
-var mongoose = require('mongoose')
-    , csv = require('fast-csv');
-var MinistatSchema = require('./schemas/minStat');
+let mongoose = require('mongoose');
+let csv = require('fast-csv');
+let Stat = require('./schemas/stat');
+let All = require('./schemas/all');
 
+let saved = 0;
 
-module.exports.importFile = function(filePath, fileHeaders) {
+module.exports.importFile = function(name, filePath, fileHeaders) {
+    let entry = [];
     csv.fromPath(filePath, {headers: fileHeaders})
         .on('data', function(data) {
 
-            var TV=data[1],
-                Radio=data[2],
-                Newspaper=data[3],
-                Sales=data[4];
 
-            var curr = new MinistatSchema({
-                TV: TV,
-                Radio: Radio,
-                Newspaper: Newspaper,
-                Sales:Sales
+            let headers = {};
+            fileHeaders.REGIONS.headers.forEach(function (head, i) {
+                headers[head] = data[i];
             });
-            curr.save(function (err, entry) {
-                if (err)
-                    console.log(err);
-            });
+
+            if(headers[fileHeaders.REGIONS.headers[0]] !== fileHeaders.REGIONS.headers[0]){
+                entry.push(headers);
+            }
         })
         .on('end', function() {
-            console.log("done");
+        let newinput = new All({
+            obj : entry,
+            name : name
+            });
+
+        newinput.save()
+
         });
 };
