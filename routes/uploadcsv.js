@@ -42,7 +42,7 @@ function uploadToHDFS(hdfsFile, res) {
 
     child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyFromLocal " + hdfsFile, function (error) {
         if (error) {
-            console.log(error);
+            console.log("error in hadoop");
         }
             res.status(200).json({message: 'file uploaded'});
         fs.unlinkSync(hdfsFile);
@@ -56,7 +56,7 @@ router.get('/load-to-mongo', function (req, res) {
 
     child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyToLocal " + req.query.name + ".csv" + " mongotmp", function (error) {
         if (error) {
-            console.log(error);
+            console.log("error in hadoop");
         }
             firstline(path.resolve('mongotmp/'+req.query.name + ".csv")).then(function (line) {
                 if (line.charAt(line.length - 1) === '\r') {
@@ -76,7 +76,6 @@ router.get('/load-to-mongo', function (req, res) {
             }).catch(function (err) {
                 console.log(err.message);
                 res.status(404).json({message:" file not found"});
-                fs.unlinkSync(path.resolve('mongotmp/'+req.query.name + ".csv"));
             });
     });
 });
