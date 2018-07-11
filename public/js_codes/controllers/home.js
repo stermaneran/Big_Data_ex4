@@ -34,6 +34,8 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
     $scope.getAllDatasets = function() {
+        $scope.predicted = false;
+        $scope.searchFilter = {};
         ProfileService.getAllDatasets()
             .then(function(data) {
                 $scope.datasetOptions = data.data.ans;

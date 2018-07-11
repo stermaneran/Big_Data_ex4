@@ -26,8 +26,9 @@ Get IP:
 hostname -I | awk '{print $1;}'
 
 SCP:
-cd /home && rm -r home/Big_Data_ex4 && scp -r -P22 dbar@IPADDR:/home/dbar/Documents/School/bigdata/Big_Data_ex4 /home/
-scp -r -P22 dbar@IPADDR:/home/dbar/Documents/School/bigdata/Big_Data_ex4 /home/
+cd /home; rm -r /home/Big_Data_ex4; scp -r -P22 dbar@IPADDR:/home/dbar/Documents/School/bigdata/Big_Data_ex4 /home/;
+cd Big_Data_ex4; node app
+
 
 Get Docker container ID:
 sudo docker container ls |grep bigdataex4 | awk '{print $1;}'
