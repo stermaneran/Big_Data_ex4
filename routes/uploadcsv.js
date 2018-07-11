@@ -21,9 +21,12 @@ router.post('/post-file', type, function (req, res) {
             let pathToFile = path.resolve(filePath);
             let newName = path.resolve('upload');
             fs.rename(pathToFile, newName + "/" + req.file.originalname, function (err) {
-                if (err) console.log('ERROR: ' + err);
+                if (err) {
+                    console.log('ERROR: ' + err);
+                    res.status(400).json({message: 'change name'});
+                }
                 else {
-                    uploadToHDFS(newName + "/" + req.file.originalname);
+                    uploadToHDFS(newName + "/" + req.file.originalname, res);
                 }
             });
 
@@ -35,14 +38,15 @@ router.post('/post-file', type, function (req, res) {
 var exec = require('child_process').exec;
 var child;
 
-function uploadToHDFS(hdfsFile) {
+function uploadToHDFS(hdfsFile, res) {
 
-    child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyFromLocal " + hdfsFile, function (error, stdout, stderr) {
-        if (stdout) {
-            console.log('stdout: ' + stdout);
+    child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyFromLocal " + hdfsFile, function (error) {
+        if (error) {
+            console.log(error);
+            res.status(400).json(error);
         }
-        if (error !== null) {
-            console.log('exec error: ' + error);
+        else {
+            res.status(200).json({message: 'file uploaded'});
         }
         fs.unlinkSync(hdfsFile);
     });
@@ -53,36 +57,31 @@ let firstline = require('firstline');
 let load_data = require('../load_data');
 router.get('/load-to-mongo', function (req, res) {
 
-    child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyToLocal " + req.query.name + ".csv" + " mongotmp", function (error, stdout, stderr) {
-        if (stdout) {
-            console.log('stdout: ' + stdout);
-        }
+    child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyToLocal " + req.query.name + ".csv" + " mongotmp", function (error) {
         if (error) {
-            console.log('exec error: ' + error);
+            console.log(error);
+            res.status(400).json(error);
         }
-
-        firstline(path.resolve(req.query.name + ".csv")).then(function (line) {
-            if (line.charAt(line.length - 1) === '\r') {
-                line = line.substring(0, line.length - 1)
-            }
-            let headers = line.split(",");
-            let csvheaders = {
-                REGIONS: {
-                    headers: headers
-                },
-                STATES: {
-                    headers: ['String']
+        else {
+            firstline(path.resolve(req.query.name + ".csv")).then(function (line) {
+                if (line.charAt(line.length - 1) === '\r') {
+                    line = line.substring(0, line.length - 1)
                 }
-            };
-            console.log("uploading " + req.query.name + ".csv");
-            load_data.importFile(req.query.name, path.resolve(req.query.name + ".csv"), csvheaders);
-            res.status(200).json({message: 'success'});
-
-        });
+                let headers = line.split(",");
+                let csvheaders = {
+                    REGIONS: {
+                        headers: headers
+                    },
+                    STATES: {
+                        headers: ['String']
+                    }
+                };
+                console.log("uploading " + req.query.name + ".csv");
+                load_data.importFile(req.query.name, path.resolve(req.query.name + ".csv"), csvheaders, res);
+            });
+        }
     });
 });
-
-
 
 
 module.exports = router;

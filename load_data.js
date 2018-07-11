@@ -49,11 +49,13 @@ module.exports.importFile = function(name, filePath, fileHeaders) {
 
                         newinput.save().then(function () {
                             console.log("saved " + name + " to DB");
+                            res.status(200).json({message: 'success'});
                         })
                     });
             }
             else{
                 console.log(name + " already in  DB");
+                res.status(200).json({message: 'success'});
             }
         }
         });
