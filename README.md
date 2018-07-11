@@ -19,14 +19,18 @@ node app
 
 
 ***********
-sudo docker exec 8dfcfe715a49 /bin/bash -c 'cd /home/Big_Data_ex4 && node app'
+
+Get IP:
+hostname -I | awk '{print $1;}'
+
+Get Docker container ID:
+sudo docker container ls |grep bigdataex4 | awk '{print $1;}'
 
 
+Run node server:
+sudo docker exec d58d01b16c25 /bin/bash -c "cd /home/Big_Data_ex4 ; node app"
 
 
-ip a |grep wlp1s0 |grep inet| awk '{print $2;}'| sed -e 's/\/20//g'
-
-sudo docker exec 8dfcfe715a49 /bin/bash -c "cd /home && rm -r Big_Data_ex4 && scp -P22 dbar@$IPADDR:/home/dbar/Documents/School/bigdata/Big_Data_ex4 . && cd Big_Data_ex4 && node app"
 **********
 
 (sudo docker exec <DOCKER_CONT_ID> /bin/bash -c '<CMD>')
