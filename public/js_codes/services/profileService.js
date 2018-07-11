@@ -88,8 +88,14 @@ BDApp.service('ProfileService', function ($http) {
 
 
 
-    this.search = function (filters) {
-        return $http.get('/queries/search?sex=' + filters.sex + '&intent=' + filters.intent + '&education=' + filters.education + '&place=' + filters.place + '&race=' + filters.race)
+    this.search = function (filters, name) {
+        return $http(
+            {
+                method: 'POST',
+                url: '/queries/search',
+                headers : { 'Content-Type' : 'application/json' },
+                data: {match: filters, name: name}
+            })
             .then(function (data) {
                 return data;
             })

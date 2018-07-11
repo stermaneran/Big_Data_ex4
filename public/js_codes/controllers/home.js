@@ -152,7 +152,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.search = function() {
         $scope.searchingInProgress = true;
 
-        ProfileService.search($scope.searchFilter)
+        ProfileService.search($scope.searchFilter, $scope.datasetName)
             .then(function (data) {
                 // console.log(JSON.stringify(data.data.ans));
                 $scope.result = data.data.ans;
@@ -217,7 +217,8 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.searchChoose = function(input, type) {
         console.log("Called role choose");
         $('.search-' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
-        $scope.searchFilter[type] = input;
+        $scope.searchFilter["obj." + type] = input;
+
     };
 
 
