@@ -180,8 +180,8 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
         var pred = input;
 
         for (var i = 0; i < $scope.datasetHeaders.length; ++i) {
-            if ($scope.datasetHeaders[i] !== pred) {
-                $scope.features.push($scope.datasetHeaders[i]);
+            if ($scope.datasetHeaders[i].name !== pred) {
+                $scope.features.push($scope.datasetHeaders[i].name);
             }
         }
 

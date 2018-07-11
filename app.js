@@ -1,14 +1,14 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var mongoose = require('mongoose');
+let express = require('express');
+let path = require('path');
+let logger = require('morgan');
+let mongoose = require('mongoose');
 mongoose.Promise = require("bluebird");
 
-var queries = require('./routes/queries');
-var uploads = require('./routes/uploadcsv');
-var learn = require('./routes/learn');
+let queries = require('./routes/queries');
+let uploads = require('./routes/uploadcsv');
+let learn = require('./routes/learn');
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,17 +24,17 @@ app.use('/upload', uploads);
 app.use('/learn', learn);
 
 
-var myLessCompiler = require("./tools/less_compiler");
+let myLessCompiler = require("./tools/less_compiler");
 myLessCompiler();
 
 
-var mongoDB = 'mongodb+srv://damir:damiri@cluster0-5kimc.mongodb.net/test?retryWrites=true';
+let mongoDB = 'mongodb+srv://damir:damiri@cluster0-5kimc.mongodb.net/test?retryWrites=true';
 mongoose.connect(mongoDB, {
         // useMongoClient: true
     }
 );
 
-var db = mongoose.connection;
+let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error!\n'));
 
 app.get('/', function (req, res) {
@@ -47,27 +47,27 @@ app.listen(3000, function () {
 });
 
 
-var load_data = require('./load_data');
-let csvheaders = {
-    REGIONS: {
-        headers: ['intent',  'sex', 'place', 'education', 'race']
-    },
-    STATES: {
-        headers: ['String']
-    }
-};
-// load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
-
-
-// var load_data = require('./load_data');
+// let load_data = require('./load_data');
 // let csvheaders = {
 //     REGIONS: {
-//         headers: ["","TV","Radio","Newspaper","Sales"]
+//         headers: ['intent',  'sex', 'place', 'education', 'race']
 //     },
 //     STATES: {
 //         headers: ['String']
 //     }
 // };
-// load_data.importFile("test", path.resolve("test" + ".csv"), csvheaders);
+// load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
+
+
+let load_data = require('./load_data');
+let csvheaders = {
+    REGIONS: {
+        headers: ["TV","Radio","Newspaper","Sales"]
+    },
+    STATES: {
+        headers: ['String']
+    }
+};
+load_data.importFile("test", path.resolve("test" + ".csv"), csvheaders);
 
 module.exports = app;
