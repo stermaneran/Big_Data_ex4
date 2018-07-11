@@ -77,4 +77,15 @@ BDApp.service('ProfileService', function ($http) {
     };
 
 
+    this.getAllDatasets = function() {
+        return $http.get('/queries/all')
+            .then(function (data) {
+                return data;
+            })
+            .catch(function () {
+                console.log("Caught error in getting datasets");
+            });
+    }
+
+
 });

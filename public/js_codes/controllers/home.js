@@ -16,6 +16,22 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.choices = {};
     $scope.searchFilter = {};
 
+
+    $scope.datasetOptions = [];
+
+
+    ProfileService.getAllDatasets()
+        .then(function(data) {
+            $scope.datasetOptions = data.data.ans;
+            console.log("Got datasets: " + $scope.datasetOptions)
+        }, function(err) {
+            console.log("Error getting datasets");
+        });
+
+
+
+
+
     $scope.searchByAge = function() {
         ProfileService.getByAge($scope.entry.age)
             .then(function (data) {
@@ -151,6 +167,9 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
         $('.search-' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
         $scope.searchFilter[type] = input;
     };
+
+
+
 
     // $scope.edChoose = function(input) {
     //     console.log("Called role choose");
