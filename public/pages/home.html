@@ -37,9 +37,8 @@
 
                 <input class="col-5" type="text" name="filename" ng-model="filename">
                 <!--<div class="col-1"></div>-->
-                <button class="col-2" ng-click="loadCSV(filename)">Load</button>
-                <button class="col-2"</button>
-
+                <button class="btn btn-success col-2" ng-click="loadCSV(filename)">Load</button>
+                <div class="col-2"></div>
 
                 <div class="col-5"></div>
                 <!--<div class="col-1"></div>-->
@@ -72,7 +71,7 @@
 
             <div class="learn-by-div" ng-show="isChosenDataset">
 
-            <div class="text col-3">Learn by:</div>
+            <h2 class="text col-3">Learn by:</h2>
 
             <div class="dropdown btn-group col-2">
                 <button class="btn btn-secondary dropdown-toggle dropdown-header field-drop"
@@ -85,12 +84,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <input class="col-5" type="text" name="filename" ng-model="filename">
-
-
-            <button class="col-2" ng-click="learnDataset(filename)" ng-show="!learningInProgress">Learn</button>
 
             <div class="col-2" ng-show="learningInProgress"></div>
 
@@ -178,7 +171,7 @@
                     <!--</div>-->
 
 
-                    <div class="dropdown btn-group col-2" ng-repeat="predHead in features">
+                    <div class="dropdown btn-group col-2" ng-repeat="predHead in datasetHeaders" ng-if="predHead.name !== pred">
                         <button class="btn btn-secondary dropdown-toggle dropdown-header {{predHead.name + '-drop'}}"
                                 type="button" id="dropdownMenu1" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -197,7 +190,8 @@
 
 
                     <button class="col-2" ng-click="predict()" ng-show="!predictingInProgress"
-                            ng-disabled="!choices.education || !choices.sex || !choices.place || !choices.intent">
+                            ng-disabled="false">
+                            <!--ng-disabled="!choices.education || !choices.sex || !choices.place || !choices.intent">-->
                         Predict
                     </button>
 

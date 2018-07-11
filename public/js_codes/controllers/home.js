@@ -18,6 +18,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
     $scope.datasetOptions = [];
+    $scope.datasetHeaders = [];
 
     $scope.isDatasetOptionsReady = false;
     $scope.isReadyToSearchAndPredict = false;
@@ -177,34 +178,24 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
         console.log("Called predictChoose with input = " + input + ", type = " + type);
         $('.field-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
         $scope.isChosenLearnBy = true;
-        var pred = input;
+        $scope.pred = input;
 
         for (var i = 0; i < $scope.datasetHeaders.length; ++i) {
-            if ($scope.datasetHeaders[i] !== pred) {
-                $scope.features.push($scope.datasetHeaders[i]);
+            if ($scope.datasetHeaders[i].name !== $scope.pred) {
+                $scope.features.push($scope.datasetHeaders[i].name);
             }
         }
 
 
 
         $scope.learningInProgress = true;
-        ProfileService.learnDataset(pred, $scope.features, $scope.datasetName)
+        ProfileService.learnDataset($scope.pred, $scope.features, $scope.datasetName)
             .then(function (data) {
                 console.log("data = " + JSON.stringify(data));
 
                 $scope.learningInProgress = false;
                 $scope.isReadyToSearchAndPredict = true;
-                // $scope.func.m = data.data.m;
-                // $scope.func.n = data.data.n;
-                //
-                // if(data.data.n){
-                //     $scope.learned = false;
-                //     $scope.nanError=true;
-                // }
-                // else{
-                //     $scope.nanError=false;
-                //     $scope.learned = true;
-                // }
+
             }, function (err) {
                 $scope.learningInProgress = false;
                 console.log("Error loading csv to mongo");
