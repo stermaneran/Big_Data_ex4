@@ -188,7 +188,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
         $scope.learningInProgress = true;
-        ProfileService.learnDataset(pred, $scope.features)
+        ProfileService.learnDataset(pred, $scope.features, $scope.datasetName)
             .then(function (data) {
                 console.log("data = " + JSON.stringify(data));
 

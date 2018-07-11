@@ -52,8 +52,14 @@ BDApp.service('ProfileService', function ($http) {
     //         });
     // };
 
-    this.learnDataset = function (pred, features) {
-        return $http.post('/learn/process', {pred: pred, features: features})
+    this.learnDataset = function (pred, features, name) {
+        return $http(
+        {
+            method: 'POST',
+                url: '/learn/process',
+            headers : { 'Content-Type' : 'application/json' },
+            data: {pred: pred, features: features, name: name}
+        })
             .then(function (data) {
                 return data;
             })
