@@ -47,56 +47,56 @@ app.listen(3000, function () {
 });
 
 
-// let load_data = require('./load_data');
-// let csvheaders = {
-//     REGIONS: {
-//         headers: ['intent',  'sex', 'place', 'education', 'race']
-//     },
-//     STATES: {
-//         headers: ['String']
-//     }
-// };
-// load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
+let load_data = require('./load_data');
+let csvheaders = {
+    REGIONS: {
+        headers: ['intent',  'sex', 'place', 'education', 'race']
+    },
+    STATES: {
+        headers: ['String']
+    }
+};
+load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
 
 
-// let load_data = require('./load_data');
-// let csvheaders = {
-//     REGIONS: {
-//         headers: ["outlook","temp","humidity","wind", "plat"]
-//     },
-//     STATES: {
-//         headers: ['String']
-//     }
-// };
-// load_data.importFile("tennis", path.resolve("tennis" + ".csv"), csvheaders);
+load_data = require('./load_data');
+csvheaders = {
+    REGIONS: {
+        headers: ["outlook","temp","humidity","wind", "play"]
+    },
+    STATES: {
+        headers: ['String']
+    }
+};
+load_data.importFile("tennis", path.resolve("tennis" + ".csv"), csvheaders);
 
 
-var DecisionTree = require('decision-tree');
-
-
-var training_data1 = [
-    {"outlook" : "Sunny", "temp" : "Hot", "humidity" : 'High', "wind": "Weak" , "play": "No"},
-    {"outlook" : "Sunny", "temp" : "Hot", "humidity" : 'High', "wind": "Strong" , "play": "No"},
-    {"outlook" : "Overcast", "temp" : "Hot", "humidity" : 'High', "wind": "Weak" , "play": "Yes"},
-    {"outlook" : "Rain", "temp" : "Mild", "humidity" : 'High', "wind": "Weak" , "play": "Yes"},
-    {"outlook" : "Rain", "temp" : "Cool", "humidity" : 'Normal', "wind": "Weak" , "play": "Yes"},
-];
-
-var class_name = "play";
-
-var features = ['outlook', 'temp', 'humidity', 'wind'];
-
-var dt = new DecisionTree(training_data1, class_name, features);
-
-var predicted_class = dt.predict({
-    outlook : "Sunny",
-    temp : "Hot",
-    "humidity" : 'High',
-    "wind": "Weak"
-});
-
-var treeModel = dt.toJSON();
-
-console.log("done");
+// var DecisionTree = require('decision-tree');
+//
+//
+// var training_data1 = [
+//     {"outlook" : "Sunny", "temp" : "Hot", "humidity" : 'High', "wind": "Weak" , "play": "No"},
+//     {"outlook" : "Sunny", "temp" : "Hot", "humidity" : 'High', "wind": "Strong" , "play": "No"},
+//     {"outlook" : "Overcast", "temp" : "Hot", "humidity" : 'High', "wind": "Weak" , "play": "Yes"},
+//     {"outlook" : "Rain", "temp" : "Mild", "humidity" : 'High', "wind": "Weak" , "play": "Yes"},
+//     {"outlook" : "Rain", "temp" : "Cool", "humidity" : 'Normal', "wind": "Weak" , "play": "Yes"},
+// ];
+//
+// var class_name = "play";
+//
+// var features = ['outlook', 'temp', 'humidity', 'wind'];
+//
+// var dt = new DecisionTree(training_data1, class_name, features);
+//
+// var predicted_class = dt.predict({
+//     outlook : "Sunny",
+//     temp : "Hot",
+//     "humidity" : 'High',
+//     "wind": "Weak"
+// });
+//
+// var treeModel = dt.toJSON();
+//
+// console.log("done");
 
 module.exports = app;
