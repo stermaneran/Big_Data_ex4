@@ -6,7 +6,6 @@ const DT = require('../schemas/dt');
 
 
 router.post("/process", function (req, res) {
-
     console.log("learning " + req.query.name + ".csv");
     DT.findOneAndRemove({name: req.query.name}, function(err){
         if (err) {
@@ -21,8 +20,11 @@ router.post("/process", function (req, res) {
                 }
                 else {
                     // let class_name = "race";
-                    let class_name = req.body;/////
-                    let features = ["intent", "sex", "education", "place"];
+                    let class_name = req.body.pred;
+
+                    // let features = ["intent", "sex", "education", "place"];
+                    let features = req.body.features;
+
                     let dt = new DecisionTree(all.obj, class_name, features);
 
                     let tree = new DT({
@@ -32,8 +34,9 @@ router.post("/process", function (req, res) {
                         features: dt.features
                     });
                     tree.save().then(function () {
+                        console.log("saved tree for " + req.query.name);
                         res.status(200).json({message: "Success"});
-                    })
+                    });
                 }
             });
         }
@@ -44,25 +47,26 @@ router.post("/process", function (req, res) {
 
 router.post('/predict', function (req, res) {
 
-    console.log("predicting...");
+    console.log("predicting " + req.query.name);
 
-    // DT.findOne({name: req.query.name},function (err, tree) {
-    DT.findOne({name: "guns4"}, function (err, tree) {
+    DT.findOne({name: req.query.name},function (err, tree) {
         if (err) {
             console.log(err);
             res.status(500).json(err);
         }
         else {
             let dt = new DecisionTree(tree.data, tree.target, tree.features);
-            let predicted_class = dt.predict({
-                intent: req.query.intent,
-                sex: req.query.sex,
-                education: req.query.education,
-                place: req.query.place
-            });
 
+            // let predicted_class = dt.predict({
+            //     intent: req.query.intent,
+            //     sex: req.query.sex,
+            //     education: req.query.education,
+            //     place: req.query.place
+            // });
+
+            let predicted_class = dt.predict(req.body.pred);
             res.status(200).json({ans: predicted_class});
-            console.log(predicted_class);
+            console.log("prediction: "+predicted_class);
         }
     });
 });
