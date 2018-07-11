@@ -26,6 +26,7 @@ Get IP:
 hostname -I | awk '{print $1;}'
 
 SCP:
+cd /home && rm -r home/Big_Data_ex4 && scp -r -P22 dbar@IPADDR:/home/dbar/Documents/School/bigdata/Big_Data_ex4 /home/
 scp -r -P22 dbar@IPADDR:/home/dbar/Documents/School/bigdata/Big_Data_ex4 /home/
 
 Get Docker container ID:

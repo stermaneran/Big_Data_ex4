@@ -80,7 +80,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
     $scope.uploadFile = function () {
-
+        $scope.doneUploading = false;
         var file = $scope.myFile;
         console.log("MYFILE = " + $scope.myFile);
         var uploadUrl = "/upload/post-file";
@@ -101,6 +101,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     };
 
     $scope.loadCSV = function (filename){
+        $scope.doneLoadingCSV = false;
         ProfileService.loadCSV(filename)
             .then(function (data) {
                 $scope.doneLoadingCSV = true;
