@@ -151,16 +151,18 @@
 
 
                     <div class="dropdown btn-group col-2" ng-repeat="predHead in datasetHeaders">
-                        <button class="btn btn-secondary dropdown-toggle dropdown-header intent-drop"
+                        <button class="btn btn-secondary dropdown-toggle dropdown-header {{predHead.name + '-drop'}}"
                                 type="button" id="dropdownMenu1" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                            {{predHead.name}}
+                            {{predHead.name.charAt(0).toUpperCase() + predHead.name.slice(1)}}
                         </button>
+
+
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <!--<div class="dropdown-item" ng-click="predictChoose('Suicide', 'intent')">Suicide</div>-->
 
-                            <div class="dropdown-item" ng-click="predictChoose(fieldname, predHead.name)"
-                                 ng-repeat="fieldName in datasetHeaders.ops">{{fieldName}}
+                            <div class="dropdown-item" ng-click="predictChoose(fieldName, predHead.name)"
+                                 ng-repeat="fieldName in predHead.ops">{{fieldName}}
                             </div>
                         </div>
                     </div>

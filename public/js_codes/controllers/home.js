@@ -159,9 +159,10 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
     $scope.predictChoose = function(input, type) {
-        console.log("Called role choose");
+        console.log("Called predictChoose with input = " + input + ", type = " + type);
         $('.' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
         $scope.choices[type] = input;
+
     };
 
 
@@ -180,6 +181,9 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
             .then(function(data) {
                 $scope.datasetHeaders = data.data.ans;
                 console.log("Got dataset headers: " + $scope.datasetHeaders);
+                for (let i = 0; i < $scope.datasetHeaders.length; ++i) {
+                    console.log(JSON.stringify($scope.datasetHeaders[i]))
+                }
                 $scope.isReadyToSearchAndPredict = true;
             }, function(err) {
                 console.log("Errors getting dataset headers");
