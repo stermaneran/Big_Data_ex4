@@ -1,7 +1,7 @@
 let csv = require('fast-csv');
 let All = require('./schemas/all');
 
-module.exports.importFile = function(name, filePath, fileHeaders) {
+module.exports.importFile = function(name, filePath, fileHeaders, res) {
     let entry = [];
     let drop = [];
     All.findOne({name: name}, function(err, kayum){
