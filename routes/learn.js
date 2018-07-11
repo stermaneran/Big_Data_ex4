@@ -20,7 +20,8 @@ router.post("/process", function (req, res) {
                     res.status(500).json(err);
                 }
                 else {
-                    let class_name = "race";
+                    // let class_name = "race";
+                    let class_name = req.body;/////
                     let features = ["intent", "sex", "education", "place"];
                     let dt = new DecisionTree(all.obj, class_name, features);
 
