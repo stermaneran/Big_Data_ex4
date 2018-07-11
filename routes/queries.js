@@ -5,14 +5,14 @@ const All = require('../schemas/all');
 
 router.get("/search", function (req, res) {
 
-    // console.log("searching in " + req.query.name);
+    console.log("searching in " + req.query.name);
+    // let match = {"obj.intent" : "Suicide" , "obj.sex" : "F", "obj.place" : "Farm"};
+    let match = req.query.match;
     All.aggregate([
         {$match: {name : req.query.name}},
         {$unwind: "$obj"},
-        {$match: {"obj.intent" : "Suicide"}},
-        {$match: {"obj.sex" : "M"}},
-        {$match: {"obj.place" : "Farm"}},
-        {$project: {"_id":0, "name":0, "headers":0}}
+        {$match: match},
+        {$project: {"_id":0, "name":0, "headers":0, '__v': 0}}
     ], function (err, result) {
             if (err) {
                 console.log(err);

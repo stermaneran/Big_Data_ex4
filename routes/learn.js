@@ -6,35 +6,33 @@ const DT = require('../schemas/dt');
 
 
 router.post("/process", function (req, res) {
-    console.log("learning " + req.query.name + ".csv");
-    DT.findOneAndRemove({name: req.query.name}, function(err){
+    console.log("learning " + req.body.name + ".csv");
+    DT.findOneAndRemove({name: req.body.name}, function(err){
         if (err) {
             console.log(err);
             res.status(500).json(err);
         }
         else {
-            All.findOne({name: req.query.name}, function (err, all) {
+            All.findOne({name: req.body.name}, function (err, all) {
                 if (err) {
                     console.log(err);
                     res.status(500).json(err);
                 }
                 else {
-                    // let class_name = "race";
-                    let class_name = req.body.pred;
 
-                    // let features = ["intent", "sex", "education", "place"];
+                    let class_name = req.body.pred;
                     let features = req.body.features;
 
                     let dt = new DecisionTree(all.obj, class_name, features);
 
                     let tree = new DT({
-                        name: req.query.name,
+                        name: req.body.name,
                         data: dt.data,
                         target: dt.target,
                         features: dt.features
                     });
                     tree.save().then(function () {
-                        console.log("saved tree for " + req.query.name);
+                        console.log("saved tree for " + req.body.name);
                         res.status(200).json({message: "Success"});
                     });
                 }
@@ -47,9 +45,9 @@ router.post("/process", function (req, res) {
 
 router.post('/predict', function (req, res) {
 
-    console.log("predicting " + req.query.name);
+    console.log("predicting " + req.body.name);
 
-    DT.findOne({name: req.query.name},function (err, tree) {
+    DT.findOne({name: req.body.name},function (err, tree) {
         if (err) {
             console.log(err);
             res.status(500).json(err);
@@ -58,10 +56,10 @@ router.post('/predict', function (req, res) {
             let dt = new DecisionTree(tree.data, tree.target, tree.features);
 
             // let predicted_class = dt.predict({
-            //     intent: req.query.intent,
-            //     sex: req.query.sex,
-            //     education: req.query.education,
-            //     place: req.query.place
+            //     intent: req.body.intent,
+            //     sex: req.body.sex,
+            //     education: req.body.education,
+            //     place: req.body.place
             // });
 
             let predicted_class = dt.predict(req.body.pred);
