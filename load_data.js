@@ -43,6 +43,5 @@ module.exports.importFile = function(name, filePath, fileHeaders) {
         newinput.save().then(function () {
             console.log("saved " +name + " to DB");
         })
-
         });
 };
