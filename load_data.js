@@ -8,7 +8,6 @@ module.exports.importFile = function(name, filePath, fileHeaders, res) {
     All.findOne({name: name}, function(err, kayum){
         if (err) {
             console.log(err);
-            fs.unlinkSync(filePath);
             res.status(500).json(err);
         }
         else {
@@ -51,14 +50,12 @@ module.exports.importFile = function(name, filePath, fileHeaders, res) {
 
                         newinput.save().then(function () {
                             console.log("saved " + name + " to DB");
-                            fs.unlinkSync(filePath);
                             res.status(200).json({message: 'success'});
                         })
                     });
             }
             else{
                 console.log(name + " already in  DB");
-                fs.unlinkSync(filePath);
                 res.status(200).json({message: 'success'});
             }
         }
