@@ -25,7 +25,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     ProfileService.getAllDatasets()
         .then(function(data) {
             $scope.datasetOptions = data.data.ans;
-            console.log("Got datasets: " + $scope.datasetOptions)
+            console.log("Got datasets: " + $scope.datasetOptions);
             $scope.isDatasetOptionsReady = true;
         }, function(err) {
             console.log("Error getting datasets");
@@ -180,6 +180,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
             .then(function(data) {
                 $scope.datasetHeaders = data.data.ans;
                 console.log("Got dataset headers: " + $scope.datasetHeaders);
+                $scope.isReadyToSearchAndPredict = true;
             }, function(err) {
                 console.log("Errors getting dataset headers");
             })

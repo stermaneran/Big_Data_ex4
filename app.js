@@ -56,7 +56,7 @@ let csvheaders = {
         headers: ['String']
     }
 };
-load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
+// load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
 
 
 // var load_data = require('./load_data');
