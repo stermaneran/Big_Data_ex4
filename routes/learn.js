@@ -1,12 +1,9 @@
 let express = require('express');
 let router = express.Router();
 const DecisionTree = require('decision-tree');
-const Stat = require('../schemas/stat');
 const All = require('../schemas/all');
 const DT = require('../schemas/dt');
 
-var mongoose = require('mongoose');
-var db = mongoose.connection;
 
 router.post("/process", function (req, res) {
 

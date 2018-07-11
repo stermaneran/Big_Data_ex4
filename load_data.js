@@ -1,9 +1,5 @@
-let mongoose = require('mongoose');
 let csv = require('fast-csv');
-let Stat = require('./schemas/stat');
 let All = require('./schemas/all');
-
-let saved = 0;
 
 module.exports.importFile = function(name, filePath, fileHeaders) {
     let entry = [];
