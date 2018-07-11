@@ -31,14 +31,18 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
 
-    ProfileService.getAllDatasets()
-        .then(function(data) {
-            $scope.datasetOptions = data.data.ans;
-            console.log("Got datasets: " + $scope.datasetOptions);
-            $scope.isDatasetOptionsReady = true;
-        }, function(err) {
-            console.log("Error getting datasets");
-        });
+
+    $scope.getAllDatasets = function() {
+        ProfileService.getAllDatasets()
+            .then(function(data) {
+                $scope.datasetOptions = data.data.ans;
+                console.log("Got datasets: " + $scope.datasetOptions);
+                $scope.isDatasetOptionsReady = true;
+            }, function(err) {
+                console.log("Error getting datasets");
+            });
+    };
+    $scope.getAllDatasets();
 
 
 
@@ -88,6 +92,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
         })
             .then(function (data) {
                     console.log("upload success!!!");
+                    $scope.doneUploading = true;
                 },
                 function () {
                     console.log("error!!");
@@ -97,6 +102,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.loadCSV = function (filename){
         ProfileService.loadCSV(filename)
             .then(function (data) {
+                $scope.doneLoadingCSV = true;
                 console.log("The server guy told me: Success loading csv to mongo");
             }, function (err) {
                 console.log("Error loading csv to mongo");

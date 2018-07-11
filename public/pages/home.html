@@ -22,7 +22,8 @@
                 <button class="upload-file-btn rad-button wwt" ng-click="uploadFile()">Upload</button>
 
             </div>
-            <div class="col-2"></div>
+            <div class="col-2" ng-if="!doneUploading"></div>
+            <h4 class="col-2 text-success" ng-if="doneUploading">File uploaded</h4>
 
         </div>
 
@@ -38,7 +39,8 @@
                 <input class="col-5" type="text" name="filename" ng-model="filename">
                 <!--<div class="col-1"></div>-->
                 <button class="btn btn-success col-2" ng-click="loadCSV(filename)">Load</button>
-                <div class="col-2"></div>
+                <div class="col-2" ng-if="!doneLoadingCSV"></div>
+                <h4 class="col-2 text-success" ng-if="doneLoadingCSV">Done loading</h4>
 
                 <div class="col-5"></div>
                 <!--<div class="col-1"></div>-->
@@ -59,7 +61,7 @@
             <div class="dropdown btn-group col-2">
                 <button class="btn btn-secondary dropdown-toggle dropdown-header dataset-drop"
                         type="button" id="datasetDropdown" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                        aria-haspopup="true" aria-expanded="false" ng-click="getAllDatasets()">
                     Choose dataset
                 </button>
                 <div class="dropdown-menu" aria-labelledby="datasetDropdown">
@@ -378,6 +380,7 @@
 
 
     <div class="containter">
+        <h2 class="text-danger" ng-if="result.length === 0">No search results</h2>
         <table class="table table-hover" ng-if="result.length > 0">
             <thead>
             <tr>
