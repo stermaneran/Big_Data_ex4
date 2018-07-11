@@ -27,7 +27,6 @@
         </div>
 
 
-
         <hr>
         <form class="form-horizontal" role="form" name="queryform">
             <h3 class="">Load file to mongo</h3>
@@ -69,100 +68,126 @@
         <br><br><br>
 
 
-        <form class="form-horizontal" role="form" name="queryform">
-            <h1 class="display-4">Process & Predict:</h1>
-            <br>
-            <!--<div class="row">-->
-            <div class="name-div row">
-                <div class="text col-2">Choose fields:</div>
-
-                <!--<input class="col-5" type="text" name="field" ng-model="field">-->
-                <!--<div class="col-1"></div>-->
-                <!--<button class="col-2" ng-click="learnDataset(field)">Learn</button>-->
-                <!--<div class="col-1"></div>-->
-
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header intent-drop"
-                            type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Intent
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="predictChoose('Suicide', 'intent')">Suicide</div>
-                        <div class="dropdown-item" ng-click="predictChoose('Undetermined', 'intent')">Undetermined</div>
-                        <div class="dropdown-item" ng-click="predictChoose('Accidental', 'intent')">Accidental</div>
-                        <div class="dropdown-item" ng-click="predictChoose('Homicide', 'intent')">Homicide</div>
-                    </div>
+        <div class="dropdown btn-group col-2" ng-show="isDatasetOptionsReady">
+            <button class="btn btn-secondary dropdown-toggle dropdown-header dataset-drop"
+                    type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                Choose dataset
+            </button>
+            <div class="dropdown-menu" aria-labelledby="datasetDropdown">
+                <div class="dropdown-item" ng-click="datasetChoose(dataset.name)"
+                     ng-repeat="dataset in datasetOptions">{{dataset.name}}
                 </div>
+            </div>
+        </div>
 
 
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header sex-drop"
-                            type="button" id="dropdownMenu2" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Gender
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="predictChoose('M', 'sex')">Male</div>
-                        <div class="dropdown-item" ng-click="predictChoose('F', 'sex')">Female</div>
+        <div class="predict-and-search" ng-show="isReadyToSearchAndPredict">
+
+            <form class="form-horizontal" role="form" name="queryform">
+                <h1 class="display-4">Process & Predict:</h1>
+                <br>
+                <!--<div class="row">-->
+                <div class="name-div row">
+                    <div class="text col-2">Choose fields:</div>
+
+                    <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header intent-drop"-->
+                    <!--type="button" id="dropdownMenu1" data-toggle="dropdown"-->
+                    <!--aria-haspopup="true" aria-expanded="false">-->
+                    <!--Intent-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Suicide', 'intent')">Suicide</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Undetermined', 'intent')">Undetermined</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Accidental', 'intent')">Accidental</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Homicide', 'intent')">Homicide</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header sex-drop"-->
+                    <!--type="button" id="dropdownMenu2" data-toggle="dropdown"-->
+                    <!--aria-haspopup="true" aria-expanded="false">-->
+                    <!--Gender-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('M', 'sex')">Male</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('F', 'sex')">Female</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header education-drop"-->
+                    <!--type="button" id="dropdownMenu3" data-toggle="dropdown"-->
+                    <!--aria-haspopup="true" aria-expanded="false">-->
+                    <!--Education-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('1', 'education')">1</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('2', 'education')">2</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('3', 'education')">3</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('4', 'education')">4</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('5', 'education')">5</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header place-drop"-->
+                    <!--type="button" id="dropdownMenu4" data-toggle="dropdown"-->
+                    <!--aria-haspopup="true" aria-expanded="false">-->
+                    <!--Place-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Home', 'place')">Home</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Other', 'place')">Other</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Street', 'place')">Street</div>-->
+                    <!--<div class="dropdown-item" ng-click="predictChoose('Farm', 'place')">Farm</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                    <div class="dropdown btn-group col-2" ng-repeat="predHead in datasetHeaders">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-header intent-drop"
+                                type="button" id="dropdownMenu1" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            {{predHead.name}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <div class="dropdown-item" ng-click="predictChoose('Suicide', 'intent')">Suicide</div>
+                            <div class="dropdown-item" ng-click="predictChoose('Undetermined', 'intent')">Undetermined
+                            </div>
+                            <div class="dropdown-item" ng-click="predictChoose('Accidental', 'intent')">Accidental</div>
+                            <div class="dropdown-item" ng-click="predictChoose('Homicide', 'intent')">Homicide</div>
+                        </div>
                     </div>
-                </div>
 
 
-
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header education-drop"
-                            type="button" id="dropdownMenu3" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Education
+                    <button class="col-2" ng-click="predict()" ng-show="!predictingInProgress"
+                            ng-disabled="!choices.education || !choices.sex || !choices.place || !choices.intent">
+                        Predict
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="predictChoose('1', 'education')">1</div>
-                        <div class="dropdown-item" ng-click="predictChoose('2', 'education')">2</div>
-                        <div class="dropdown-item" ng-click="predictChoose('3', 'education')">3</div>
-                        <div class="dropdown-item" ng-click="predictChoose('4', 'education')">4</div>
-                        <div class="dropdown-item" ng-click="predictChoose('5', 'education')">5</div>
-                    </div>
-                </div>
 
+                    <div class="col-2" ng-show="predictingInProgress"></div>
 
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header place-drop"
-                            type="button" id="dropdownMenu4" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Place
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="predictChoose('Home', 'place')">Home</div>
-                        <div class="dropdown-item" ng-click="predictChoose('Other', 'place')">Other</div>
-                        <div class="dropdown-item" ng-click="predictChoose('Street', 'place')">Street</div>
-                        <div class="dropdown-item" ng-click="predictChoose('Farm', 'place')">Farm</div>
-                    </div>
-                </div>
+                    <div class="col-5"></div>
 
-
-                <button class="col-2" ng-click="predict()" ng-show="!predictingInProgress"
-                        ng-disabled="!choices.education || !choices.sex || !choices.place || !choices.intent">
-                    Predict
-                </button>
-
-                <div class="col-2" ng-show="predictingInProgress"></div>
-
-                <div class="col-5"></div>
-
-                <div class="col-2">
-                    <div class="loader" ng-show="predictingInProgress">
-                        <span class="a"></span>
-                        <span class="b spin">
+                    <div class="col-2">
+                        <div class="loader" ng-show="predictingInProgress">
+                            <span class="a"></span>
+                            <span class="b spin">
                             <span class="c"></span>
                         </span>
+                        </div>
                     </div>
+                    <div class="col-5"></div>
+
                 </div>
-                <div class="col-5"></div>
 
-            </div>
-
-            <!--<div class="name-div row">-->
+                <!--<div class="name-div row">-->
                 <!--<div class="text col-3">Predict ({{field ? field : ""}}):</div>-->
 
                 <!--<input class="col-3" type="text" name="predx" ng-disabled="learned" ng-model="predx">-->
@@ -173,126 +198,128 @@
                 <!--<button class="col-2" ng-click="predict(predx)">Predict</button>-->
                 <!--<div class="col-1"></div>-->
 
-            <!--</div>-->
+                <!--</div>-->
 
-            <!--</div>-->
-        </form>
+                <!--</div>-->
+            </form>
 
-        <br><br>
-        <div class="row" style="text-align: center;">
-            <h2 class="text-success col-12 display-4" ng-show="predicted"><span class="text-primary ans-div" ng-show="predicted">Prediction:</span> {{prediction}}</h2>
-        </div>
-
-
-        <hr>
-        <br><br><br><br><br><br>
-
-
-
-        <form class="form-horizontal" role="form" name="queryform">
-            <h1 class="display-4">Search</h1>
-            <br>
-            <!--<div class="row">-->
-            <div class="name-div row">
-                <div class="text col-1">Filters:</div>
-
-
-
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header search-intent-drop"
-                            type="button" id="dropdown1" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Intent
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="searchChoose('Suicide', 'intent')">Suicide</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Undetermined', 'intent')">Undetermined</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Accidental', 'intent')">Accidental</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Homicide', 'intent')">Homicide</div>
-                    </div>
-                </div>
-
-
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header search-sex-drop"
-                            type="button" id="dropdown2" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Gender
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="searchChoose('M', 'sex')">Male</div>
-                        <div class="dropdown-item" ng-click="searchChoose('F', 'sex')">Female</div>
-                    </div>
-                </div>
-
-
-
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header search-education-drop"
-                            type="button" id="dropdown3" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Education
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="searchChoose('1', 'education')">1</div>
-                        <div class="dropdown-item" ng-click="searchChoose('2', 'education')">2</div>
-                        <div class="dropdown-item" ng-click="searchChoose('3', 'education')">3</div>
-                        <div class="dropdown-item" ng-click="searchChoose('4', 'education')">4</div>
-                        <div class="dropdown-item" ng-click="searchChoose('5', 'education')">5</div>
-                    </div>
-                </div>
-
-
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header search-place-drop"
-                            type="button" id="dropdown4" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Place
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="searchChoose('Home', 'place')">Home</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Other', 'place')">Other</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Street', 'place')">Street</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Farm', 'place')">Farm</div>
-                    </div>
-                </div>
-
-                <div class="dropdown btn-group col-2">
-                    <button class="btn btn-secondary dropdown-toggle dropdown-header search-race-drop"
-                            type="button" id="dropdown4" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Race
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <div class="dropdown-item" ng-click="searchChoose('Asian', 'race')">Asian</div>
-                        <div class="dropdown-item" ng-click="searchChoose('White', 'race')">White</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Black', 'race')">Black</div>
-                        <div class="dropdown-item" ng-click="searchChoose('Hispanic', 'race')">Hispanic</div>
-                    </div>
-                </div>
-
-
-                <!--<div class="col-4"></div>-->
-                <button class="col-1" ng-click="search()" ng-show="!searchingInProgress">Search</button>
-                <!--<div class="col-4"></div>-->
-
-                <div class="col-1" ng-show="searchingInProgress"></div>
-
-                <div class="col-5"></div>
-                <div class="col-2">
-                    <div class="loader" ng-show="searchingInProgress">
-                        <span class="a"></span>
-                        <span class="b spin">
-                            <span class="c"></span>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-5"></div>
-
+            <br><br>
+            <div class="row" style="text-align: center;">
+                <h2 class="text-success col-12 display-4" ng-show="predicted"><span class="text-primary ans-div"
+                                                                                    ng-show="predicted">Prediction:</span>
+                    {{prediction}}</h2>
             </div>
 
-            <!--</div>-->
-        </form>
+
+            <hr>
+            <br><br><br><br><br><br>
+
+
+            <form class="form-horizontal" role="form" name="queryform">
+                <h1 class="display-4">Search</h1>
+                <br>
+                <!--<div class="row">-->
+                <div class="name-div row">
+                    <div class="text col-1">Filters:</div>
+
+
+                    <div class="dropdown btn-group col-2">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-intent-drop"
+                                type="button" id="dropdown1" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Intent
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <div class="dropdown-item" ng-click="searchChoose('Suicide', 'intent')">Suicide</div>
+                            <div class="dropdown-item" ng-click="searchChoose('Undetermined', 'intent')">Undetermined
+                            </div>
+                            <div class="dropdown-item" ng-click="searchChoose('Accidental', 'intent')">Accidental</div>
+                            <div class="dropdown-item" ng-click="searchChoose('Homicide', 'intent')">Homicide</div>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown btn-group col-2">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-sex-drop"
+                                type="button" id="dropdown2" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Gender
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <div class="dropdown-item" ng-click="searchChoose('M', 'sex')">Male</div>
+                            <div class="dropdown-item" ng-click="searchChoose('F', 'sex')">Female</div>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown btn-group col-2">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-education-drop"
+                                type="button" id="dropdown3" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Education
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <div class="dropdown-item" ng-click="searchChoose('1', 'education')">1</div>
+                            <div class="dropdown-item" ng-click="searchChoose('2', 'education')">2</div>
+                            <div class="dropdown-item" ng-click="searchChoose('3', 'education')">3</div>
+                            <div class="dropdown-item" ng-click="searchChoose('4', 'education')">4</div>
+                            <div class="dropdown-item" ng-click="searchChoose('5', 'education')">5</div>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown btn-group col-2">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-place-drop"
+                                type="button" id="dropdown4" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Place
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <div class="dropdown-item" ng-click="searchChoose('Home', 'place')">Home</div>
+                            <div class="dropdown-item" ng-click="searchChoose('Other', 'place')">Other</div>
+                            <div class="dropdown-item" ng-click="searchChoose('Street', 'place')">Street</div>
+                            <div class="dropdown-item" ng-click="searchChoose('Farm', 'place')">Farm</div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown btn-group col-2">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-race-drop"
+                                type="button" id="dropdown4" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Race
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <div class="dropdown-item" ng-click="searchChoose('Asian', 'race')">Asian</div>
+                            <div class="dropdown-item" ng-click="searchChoose('White', 'race')">White</div>
+                            <div class="dropdown-item" ng-click="searchChoose('Black', 'race')">Black</div>
+                            <div class="dropdown-item" ng-click="searchChoose('Hispanic', 'race')">Hispanic</div>
+                        </div>
+                    </div>
+
+
+                    <!--<div class="col-4"></div>-->
+                    <button class="col-1" ng-click="search()" ng-show="!searchingInProgress">Search</button>
+                    <!--<div class="col-4"></div>-->
+
+                    <div class="col-1" ng-show="searchingInProgress"></div>
+
+                    <div class="col-5"></div>
+                    <div class="col-2">
+                        <div class="loader" ng-show="searchingInProgress">
+                            <span class="a"></span>
+                            <span class="b spin">
+                            <span class="c"></span>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-5"></div>
+
+                </div>
+
+                <!--</div>-->
+            </form>
+
+        </div>
 
 
     </div>

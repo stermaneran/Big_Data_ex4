@@ -19,11 +19,14 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
     $scope.datasetOptions = [];
 
+    $scope.isDatasetOptionsReady = false;
+    $scope.isReadyToSearchAndPredict = false;
 
     ProfileService.getAllDatasets()
         .then(function(data) {
             $scope.datasetOptions = data.data.ans;
             console.log("Got datasets: " + $scope.datasetOptions)
+            $scope.isDatasetOptionsReady = true;
         }, function(err) {
             console.log("Error getting datasets");
         });
@@ -166,6 +169,20 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
         console.log("Called role choose");
         $('.search-' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
         $scope.searchFilter[type] = input;
+    };
+
+
+    $scope.datasetChoose = function(input) {
+        console.log("Called role choose");
+        $('.dataset-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+
+        ProfileService.getDatasetHeaders(input)
+            .then(function(data) {
+                $scope.datasetHeaders = data.data.ans;
+                console.log("Got dataset headers: " + $scope.datasetHeaders);
+            }, function(err) {
+                console.log("Errors getting dataset headers");
+            })
     };
 
 

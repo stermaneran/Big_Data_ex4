@@ -88,4 +88,16 @@ BDApp.service('ProfileService', function ($http) {
     }
 
 
+
+    this.getDatasetHeaders = function(name) {
+        return $http.get('/queries/headers?name=' + name)
+            .then(function (data) {
+                return data;
+            })
+            .catch(function () {
+                console.log("Caught error in getting dataset headers");
+            });
+    }
+
+
 });
