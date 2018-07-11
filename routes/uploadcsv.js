@@ -43,11 +43,8 @@ function uploadToHDFS(hdfsFile, res) {
     child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyFromLocal " + hdfsFile, function (error) {
         if (error) {
             console.log(error);
-            res.status(400).json(error);
         }
-        else {
             res.status(200).json({message: 'file uploaded'});
-        }
         fs.unlinkSync(hdfsFile);
     });
 }
@@ -60,9 +57,7 @@ router.get('/load-to-mongo', function (req, res) {
     child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyToLocal " + req.query.name + ".csv" + " mongotmp", function (error) {
         if (error) {
             console.log(error);
-            res.status(400).json(error);
         }
-        else {
             firstline(path.resolve(req.query.name + ".csv")).then(function (line) {
                 if (line.charAt(line.length - 1) === '\r') {
                     line = line.substring(0, line.length - 1)
@@ -79,7 +74,6 @@ router.get('/load-to-mongo', function (req, res) {
                 console.log("uploading " + req.query.name + ".csv");
                 load_data.importFile(req.query.name, path.resolve(req.query.name + ".csv"), csvheaders, res);
             });
-        }
     });
 });
 
