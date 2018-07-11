@@ -157,11 +157,11 @@
                             {{predHead.name}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <div class="dropdown-item" ng-click="predictChoose('Suicide', 'intent')">Suicide</div>
-                            <div class="dropdown-item" ng-click="predictChoose('Undetermined', 'intent')">Undetermined
+                            <!--<div class="dropdown-item" ng-click="predictChoose('Suicide', 'intent')">Suicide</div>-->
+
+                            <div class="dropdown-item" ng-click="predictChoose(fieldname, predHead.name)"
+                                 ng-repeat="fieldName in datasetHeaders.ops">{{fieldName}}
                             </div>
-                            <div class="dropdown-item" ng-click="predictChoose('Accidental', 'intent')">Accidental</div>
-                            <div class="dropdown-item" ng-click="predictChoose('Homicide', 'intent')">Homicide</div>
                         </div>
                     </div>
 
