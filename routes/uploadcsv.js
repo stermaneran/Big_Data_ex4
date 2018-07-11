@@ -72,10 +72,11 @@ router.get('/load-to-mongo', function (req, res) {
                     }
                 };
                 console.log("uploading " + req.query.name + ".csv");
-                load_data.importFile(req.query.name, path.resolve(req.query.name + ".csv"), csvheaders, res);
+                load_data.importFile(req.query.name, path.resolve('mongotmp/'+req.query.name + ".csv"), csvheaders, res);
             }).catch(function (err) {
                 console.log(err.message);
                 res.status(404).json({message:" file not found"});
+                fs.unlinkSync(path.resolve('mongotmp/'+req.query.name + ".csv"));
             });
     });
 });

@@ -9,6 +9,7 @@ module.exports.importFile = function(name, filePath, fileHeaders, res) {
         if (err) {
             console.log(err);
             res.status(500).json(err);
+            fs.unlinkSync(filePath);
         }
         else {
             if (!kayum) {
@@ -51,12 +52,14 @@ module.exports.importFile = function(name, filePath, fileHeaders, res) {
                         newinput.save().then(function () {
                             console.log("saved " + name + " to DB");
                             res.status(200).json({message: 'success'});
+                            fs.unlinkSync(filePath);
                         })
                     });
             }
             else{
                 console.log(name + " already in  DB");
                 res.status(200).json({message: 'success'});
+                fs.unlinkSync(filePath);
             }
         }
         });
