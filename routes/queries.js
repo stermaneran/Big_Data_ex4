@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Stat = require("../schemas/stat");
+const All = require('../schemas/all');
 
 
 router.get("/search", function (req, res) {
@@ -34,6 +35,18 @@ router.get("/search", function (req, res) {
         if (err) throw err;
         res.status(200).json({ans: result});
     });
+});
+
+router.get("/all",function (req, res) {
+    All.find({},function (err, all) {
+        if (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+        else {
+            res.status(200).json({ans : all});
+        }
+    })
 });
 
 module.exports = router;

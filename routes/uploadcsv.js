@@ -50,7 +50,7 @@ function uploadToHDFS(hdfsFile) {
 
 let firstline = require('firstline');
 
-var load_data = require('../load_data');
+let load_data = require('../load_data');
 router.get('/load-to-mongo', function (req, res) {
 
     child = exec("$HADOOP_PREFIX/bin/hadoop fs -copyToLocal " + req.query.name + ".csv" + " mongotmp", function (error, stdout, stderr) {
