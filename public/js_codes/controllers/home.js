@@ -24,6 +24,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.isReadyToSearchAndPredict = false;
     $scope.isChosenDataset = false;
     $scope.isChosenLearnBy = false;
+    $scope.hasSearched = false;
 
     $scope.features = [];
     $scope.pred = "";
@@ -164,6 +165,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
                 $scope.result = data.data.ans;
                 console.log(JSON.stringify($scope.result));
                 $scope.searchingInProgress = false;
+                $scope.hasSearched = true;
             }, function(err) {
                 $scope.searchingInProgress = false;
 

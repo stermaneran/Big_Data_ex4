@@ -380,7 +380,7 @@
 
 
     <div class="containter">
-        <h2 class="text-danger" ng-if="result.length === 0">No search results</h2>
+        <h2 class="text-secondary" ng-if="result.length === 0 && hasSearched">No search results</h2>
         <table class="table table-hover" ng-if="result.length > 0">
             <thead>
             <tr>
