@@ -58,4 +58,16 @@ let csvheaders = {
 };
 // load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
 
+
+// var load_data = require('./load_data');
+// let csvheaders = {
+//     REGIONS: {
+//         headers: ["","TV","Radio","Newspaper","Sales"]
+//     },
+//     STATES: {
+//         headers: ['String']
+//     }
+// };
+// load_data.importFile("test", path.resolve("test" + ".csv"), csvheaders);
+
 module.exports = app;

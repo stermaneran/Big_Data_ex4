@@ -38,7 +38,7 @@ router.get("/search", function (req, res) {
 });
 
 router.get("/all",function (req, res) {
-    All.find({},function (err, all) {
+    All.find({},{name:1, _id:0},function (err, all) {
         if (err) {
             console.log(err);
             res.status(500).json(err);
@@ -48,5 +48,19 @@ router.get("/all",function (req, res) {
         }
     })
 });
+
+router.get('/headers',function (req, res) {
+    All.findOne({name: req.query.name},function (err, all) {
+        if (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+        else {
+            res.status(200).json({ans : all.headers});
+        }
+    });
+});
+
+
 
 module.exports = router;

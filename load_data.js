@@ -3,6 +3,7 @@ let All = require('./schemas/all');
 
 module.exports.importFile = function(name, filePath, fileHeaders) {
     let entry = [];
+    let drop = [];
     csv.fromPath(filePath, {headers: fileHeaders})
         .on('data', function(data) {
 
@@ -10,19 +11,38 @@ module.exports.importFile = function(name, filePath, fileHeaders) {
             let headers = {};
             fileHeaders.REGIONS.headers.forEach(function (head, i) {
                 headers[head] = data[i];
+                if(drop[i]) {
+                    if(!drop[i]["ops"]) {
+                        drop[i]["ops"] = [];
+                    }
+                    if(!drop[i]["ops"].includes(data[i])){
+                        drop[i]["ops"].push(data[i]);
+                    }
+                }
             });
 
             if(headers[fileHeaders.REGIONS.headers[0]] !== fileHeaders.REGIONS.headers[0]){
                 entry.push(headers);
             }
+            else{
+                fileHeaders.REGIONS.headers.forEach(function (head, i) {
+                    let obj  = {};
+                    obj["name"] = data[i];
+                    drop.push(obj);
+                });
+            }
+
         })
         .on('end', function() {
         let newinput = new All({
             obj : entry,
-            name : name
+            name : name,
+            headers: drop
             });
 
-        newinput.save()
+        newinput.save().then(function () {
+            console.log("saved " +name + " to DB");
+        })
 
         });
 };
