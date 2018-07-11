@@ -134,7 +134,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
         $scope.predictingInProgress = true;
 
         console.log("choices = " + JSON.stringify($scope.choices));
-        ProfileService.predict($scope.choices)
+        ProfileService.predict($scope.choices, $scope.datasetName)
             .then(function (data) {
                 console.log("Perdiction: " + JSON.stringify(data));
                 $scope.prediction = data.data.ans;
