@@ -19,16 +19,20 @@ node app
 
 
 ***********
+Run docker container:
+sudo docker run -it -p 3000:3000  bigdataex4:latest
 
 Get IP:
 hostname -I | awk '{print $1;}'
 
+SCP:
+scp -r -P22 dbar@IPADDR:/home/dbar/Documents/School/bigdata/Big_Data_ex4 /home/
+
 Get Docker container ID:
 sudo docker container ls |grep bigdataex4 | awk '{print $1;}'
 
-
 Run node server:
-sudo docker exec d58d01b16c25 /bin/bash -c "cd /home/Big_Data_ex4 ; node app"
+sudo docker exec CONT_ID /bin/bash -c "cd /home/Big_Data_ex4 ; node app"
 
 
 **********
