@@ -23,14 +23,6 @@ router.post("/process", function (req, res) {
                     let class_name = req.body.pred;
                     let features = req.body.features;
                     let dt = new DecisionTree(all.obj, class_name, features);
-
-                    let pred = dt.predict({
-                        outlook:"Sunny",
-                        temp:"Hot",
-                        humidity:"High",
-                        wind:"Weak",
-                    });
-
                     let tree = new DT({
                         name: req.body.name,
                         data: dt.data,
