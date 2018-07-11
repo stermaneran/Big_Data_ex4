@@ -156,7 +156,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
             .then(function (data) {
                 // console.log(JSON.stringify(data.data.ans));
                 $scope.result = data.data.ans;
-                // console.log($scope.result);
+                console.log(JSON.stringify($scope.result));
                 $scope.searchingInProgress = false;
             }, function(err) {
                 $scope.searchingInProgress = false;

@@ -236,114 +236,135 @@
 
 
             <hr>
-            <br><br><br><br><br><br>
 
 
-            <form class="form-horizontal" role="form" name="queryform">
-                <h1 class="display-4">Search</h1>
-                <br>
-                <!--<div class="row">-->
-                <div class="name-div row">
-                    <div class="text col-1">Filters:</div>
-
-
-                    <div class="dropdown btn-group col-2">
-                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-intent-drop"
-                                type="button" id="dropdown1" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Intent
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <div class="dropdown-item" ng-click="searchChoose('Suicide', 'intent')">Suicide</div>
-                            <div class="dropdown-item" ng-click="searchChoose('Undetermined', 'intent')">Undetermined
-                            </div>
-                            <div class="dropdown-item" ng-click="searchChoose('Accidental', 'intent')">Accidental</div>
-                            <div class="dropdown-item" ng-click="searchChoose('Homicide', 'intent')">Homicide</div>
-                        </div>
-                    </div>
-
-
-                    <div class="dropdown btn-group col-2">
-                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-sex-drop"
-                                type="button" id="dropdown2" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Gender
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <div class="dropdown-item" ng-click="searchChoose('M', 'sex')">Male</div>
-                            <div class="dropdown-item" ng-click="searchChoose('F', 'sex')">Female</div>
-                        </div>
-                    </div>
-
-
-                    <div class="dropdown btn-group col-2">
-                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-education-drop"
-                                type="button" id="dropdown3" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Education
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <div class="dropdown-item" ng-click="searchChoose('1', 'education')">1</div>
-                            <div class="dropdown-item" ng-click="searchChoose('2', 'education')">2</div>
-                            <div class="dropdown-item" ng-click="searchChoose('3', 'education')">3</div>
-                            <div class="dropdown-item" ng-click="searchChoose('4', 'education')">4</div>
-                            <div class="dropdown-item" ng-click="searchChoose('5', 'education')">5</div>
-                        </div>
-                    </div>
-
-
-                    <div class="dropdown btn-group col-2">
-                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-place-drop"
-                                type="button" id="dropdown4" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Place
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <div class="dropdown-item" ng-click="searchChoose('Home', 'place')">Home</div>
-                            <div class="dropdown-item" ng-click="searchChoose('Other', 'place')">Other</div>
-                            <div class="dropdown-item" ng-click="searchChoose('Street', 'place')">Street</div>
-                            <div class="dropdown-item" ng-click="searchChoose('Farm', 'place')">Farm</div>
-                        </div>
-                    </div>
-
-                    <div class="dropdown btn-group col-2">
-                        <button class="btn btn-secondary dropdown-toggle dropdown-header search-race-drop"
-                                type="button" id="dropdown4" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Race
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <div class="dropdown-item" ng-click="searchChoose('Asian', 'race')">Asian</div>
-                            <div class="dropdown-item" ng-click="searchChoose('White', 'race')">White</div>
-                            <div class="dropdown-item" ng-click="searchChoose('Black', 'race')">Black</div>
-                            <div class="dropdown-item" ng-click="searchChoose('Hispanic', 'race')">Hispanic</div>
-                        </div>
-                    </div>
-
-
-                    <!--<div class="col-4"></div>-->
-                    <button class="col-1" ng-click="search()" ng-show="!searchingInProgress">Search</button>
-                    <!--<div class="col-4"></div>-->
-
-                    <div class="col-1" ng-show="searchingInProgress"></div>
-
-                    <div class="col-5"></div>
-                    <div class="col-2">
-                        <div class="loader" ng-show="searchingInProgress">
-                            <span class="a"></span>
-                            <span class="b spin">
-                            <span class="c"></span>
-                        </span>
-                        </div>
-                    </div>
-                    <div class="col-5"></div>
-
-                </div>
-
-                <!--</div>-->
-            </form>
 
         </div>
+
+
+        <br><br><br><br><br><br>
+
+        <form class="form-horizontal" role="form" name="queryform"  ng-show="isChosenDataset">
+            <h1 class="display-4">Search</h1>
+            <br>
+            <!--<div class="row">-->
+            <div class="name-div row">
+                <div class="text col-1">Filters:</div>
+
+
+                <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header search-intent-drop"-->
+                            <!--type="button" id="dropdown1" data-toggle="dropdown"-->
+                            <!--aria-haspopup="true" aria-expanded="false">-->
+                        <!--Intent-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Suicide', 'intent')">Suicide</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Undetermined', 'intent')">Undetermined-->
+                        <!--</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Accidental', 'intent')">Accidental</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Homicide', 'intent')">Homicide</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header search-sex-drop"-->
+                            <!--type="button" id="dropdown2" data-toggle="dropdown"-->
+                            <!--aria-haspopup="true" aria-expanded="false">-->
+                        <!--Gender-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('M', 'sex')">Male</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('F', 'sex')">Female</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header search-education-drop"-->
+                            <!--type="button" id="dropdown3" data-toggle="dropdown"-->
+                            <!--aria-haspopup="true" aria-expanded="false">-->
+                        <!--Education-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('1', 'education')">1</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('2', 'education')">2</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('3', 'education')">3</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('4', 'education')">4</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('5', 'education')">5</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header search-place-drop"-->
+                            <!--type="button" id="dropdown4" data-toggle="dropdown"-->
+                            <!--aria-haspopup="true" aria-expanded="false">-->
+                        <!--Place-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Home', 'place')">Home</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Other', 'place')">Other</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Street', 'place')">Street</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Farm', 'place')">Farm</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="dropdown btn-group col-2">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle dropdown-header search-race-drop"-->
+                            <!--type="button" id="dropdown4" data-toggle="dropdown"-->
+                            <!--aria-haspopup="true" aria-expanded="false">-->
+                        <!--Race-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Asian', 'race')">Asian</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('White', 'race')">White</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Black', 'race')">Black</div>-->
+                        <!--<div class="dropdown-item" ng-click="searchChoose('Hispanic', 'race')">Hispanic</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <div class="dropdown btn-group col-2" ng-repeat="predHead in datasetHeaders">
+                    <button class="btn btn-secondary dropdown-toggle dropdown-header {{'search-' + predHead.name + '-drop'}}"
+                            type="button" id="searchDropdown" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        {{predHead.name.charAt(0).toUpperCase() + predHead.name.slice(1)}}
+                    </button>
+
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <!--<div class="dropdown-item" ng-click="predictChoose('Suicide', 'intent')">Suicide</div>-->
+
+                        <div class="dropdown-item" ng-click="searchChoose(fieldName, predHead.name)"
+                             ng-repeat="fieldName in predHead.ops">{{fieldName}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--<div class="col-4"></div>-->
+                <button class="col-1" ng-click="search()" ng-show="!searchingInProgress">Search</button>
+                <!--<div class="col-4"></div>-->
+
+                <div class="col-1" ng-show="searchingInProgress"></div>
+
+                <div class="col-5"></div>
+                <div class="col-2">
+                    <div class="loader" ng-show="searchingInProgress">
+                        <span class="a"></span>
+                        <span class="b spin">
+                            <span class="c"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-5"></div>
+
+            </div>
+
+            <!--</div>-->
+        </form>
 
 
     </div>
@@ -361,22 +382,19 @@
             <thead>
             <tr>
                 <th>Number</th>
-                <th>Intent</th>
-                <th>Sex</th>
-                <th>Race</th>
-                <th>Place</th>
-                <th>Education</th>
+                <th ng-repeat="predHead in datasetHeaders">{{predHead.name}}</th>
 
             </tr>
             </thead>
             <tbody class="ans-table-body">
+            <!--{{datasetHeaders}}<br><br>{{datasetHeaders.name}}-->
             <tr ng-repeat="res in result">
                 <td scope="row">{{$index + 1}}</td>
-                <td scope="row">{{res.intent}}</td>
-                <td scope="row">{{res.sex}}</td>
-                <td scope="row">{{res.race}}</td>
-                <td scope="row">{{res.place}}</td>
-                <td scope="row">{{res.education}}</td>
+                <td scope="row" ng-repeat="fieldName in datasetHeaders">{{res.obj[fieldName.name]}}</td>
+                <!--<td scope="row">{{res.sex}}</td>-->
+                <!--<td scope="row">{{res.race}}</td>-->
+                <!--<td scope="row">{{res.place}}</td>-->
+                <!--<td scope="row">{{res.education}}</td>-->
                 <td></td>
 
 
