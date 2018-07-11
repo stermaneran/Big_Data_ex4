@@ -26,6 +26,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
     $scope.features = [];
     $scope.pred = "";
+    $scope.datasetName = "";
 
 
 
@@ -242,6 +243,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
                 }
                 // $scope.isReadyToSearchAndPredict = true;
                 $scope.isChosenDataset = true;
+                $scope.datasetName = input;
             }, function(err) {
                 console.log("Errors getting dataset headers");
             })
