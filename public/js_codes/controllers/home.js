@@ -21,6 +21,13 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
     $scope.isDatasetOptionsReady = false;
     $scope.isReadyToSearchAndPredict = false;
+    $scope.isChosenDataset = false;
+    $scope.isChosenLearnBy = false;
+
+    $scope.features = [];
+    $scope.pred = "";
+
+
 
     ProfileService.getAllDatasets()
         .then(function(data) {
@@ -158,6 +165,55 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
 
 
 
+
+
+
+
+
+    // Choosers
+
+    $scope.learnByChoose = function(input, type) {
+        console.log("Called predictChoose with input = " + input + ", type = " + type);
+        $('.field-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
+        $scope.isChosenLearnBy = true;
+        var pred = input;
+
+        for (var i = 0; i < $scope.datasetHeaders.length; ++i) {
+            if ($scope.datasetHeaders[i] !== pred) {
+                $scope.features.push($scope.datasetHeaders[i]);
+            }
+        }
+
+
+
+        $scope.learningInProgress = true;
+        ProfileService.learnDataset(pred, $scope.features)
+            .then(function (data) {
+                console.log("data = " + JSON.stringify(data));
+
+                $scope.learningInProgress = false;
+                $scope.isReadyToSearchAndPredict = true;
+                // $scope.func.m = data.data.m;
+                // $scope.func.n = data.data.n;
+                //
+                // if(data.data.n){
+                //     $scope.learned = false;
+                //     $scope.nanError=true;
+                // }
+                // else{
+                //     $scope.nanError=false;
+                //     $scope.learned = true;
+                // }
+            }, function (err) {
+                $scope.learningInProgress = false;
+                console.log("Error loading csv to mongo");
+            })
+
+
+
+    };
+
+
     $scope.predictChoose = function(input, type) {
         console.log("Called predictChoose with input = " + input + ", type = " + type);
         $('.' + type + '-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
@@ -184,7 +240,8 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
                 for (let i = 0; i < $scope.datasetHeaders.length; ++i) {
                     console.log(JSON.stringify($scope.datasetHeaders[i]))
                 }
-                $scope.isReadyToSearchAndPredict = true;
+                // $scope.isReadyToSearchAndPredict = true;
+                $scope.isChosenDataset = true;
             }, function(err) {
                 console.log("Errors getting dataset headers");
             })
