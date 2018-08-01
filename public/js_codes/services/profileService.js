@@ -42,15 +42,6 @@ BDApp.service('ProfileService', function ($http) {
     };
 
 
-    // this.learnDataset = function (filename) {
-    //     return $http.post('/learn/process?name=' + filename)
-    //         .then(function (data) {
-    //             return data;
-    //         })
-    //         .catch(function () {
-    //             console.log("Caught error in load-to-mongo");
-    //         });
-    // };
 
     this.learnDataset = function (pred, features, name) {
         return $http(
@@ -113,7 +104,7 @@ BDApp.service('ProfileService', function ($http) {
             .catch(function () {
                 console.log("Caught error in getting datasets");
             });
-    }
+    };
 
 
 

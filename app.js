@@ -10,10 +10,6 @@ let learn = require('./routes/learn');
 
 let app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -28,7 +24,7 @@ let myLessCompiler = require("./tools/less_compiler");
 myLessCompiler();
 
 
-let mongoDB = 'mongodb+srv://damir:damiri@cluster0-5kimc.mongodb.net/test?retryWrites=true';
+let mongoDB = 'mongodb+srv://damir:edseds@cluster0-5kimc.mongodb.net/test?retryWrites=true';
 mongoose.connect(mongoDB, {
         // useMongoClient: true
     }
@@ -46,29 +42,6 @@ app.listen(3000, function () {
     console.log("listening on 3000");
 });
 
-
-// let load_data = require('./load_data');
-// let csvheaders = {
-//     REGIONS: {
-//         headers: ['intent',  'sex', 'place', 'education', 'race']
-//     },
-//     STATES: {
-//         headers: ['String']
-//     }
-// };
-// load_data.importFile("guns4", path.resolve("guns4" + ".csv"), csvheaders);
-//
-//
-// load_data = require('./load_data');
-// csvheaders = {
-//     REGIONS: {
-//         headers: ["outlook","temp","humidity","wind", "play"]
-//     },
-//     STATES: {
-//         headers: ['String']
-//     }
-// };
-// load_data.importFile("tennis", path.resolve("tennis" + ".csv"), csvheaders);
 
 
 module.exports = app;

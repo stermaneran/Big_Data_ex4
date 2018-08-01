@@ -63,9 +63,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.searchBySex = function() {
         ProfileService.getBySex($scope.entry.sex)
             .then(function (data) {
-                // console.log(JSON.stringify(data.data.ans));
                 $scope.result = data.data.ans;
-                // console.log($scope.result);
             })
     };
 
@@ -73,9 +71,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
     $scope.searchAgeRange = function() {
         ProfileService.getByAgeRange($scope.entry.minage, $scope.entry.maxage)
             .then(function (data) {
-                // console.log(JSON.stringify(data.data.ans));
                 $scope.result = data.data.ans;
-                // console.log($scope.result);
             })
     };
 
@@ -122,17 +118,7 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
                 console.log("data = " + JSON.stringify(data));
 
                 $scope.learningInProgress = false;
-                // $scope.func.m = data.data.m;
-                // $scope.func.n = data.data.n;
-                //
-                // if(data.data.n){
-                //     $scope.learned = false;
-                //     $scope.nanError=true;
-                // }
-                // else{
-                //     $scope.nanError=false;
-                //     $scope.learned = true;
-                // }
+
             }, function (err) {
                 $scope.learningInProgress = false;
                 console.log("Error loading csv to mongo");
@@ -252,20 +238,6 @@ BDApp.controller('homeController', ['$scope', '$http', 'ProfileService', functio
             })
     };
 
-
-
-
-    // $scope.edChoose = function(input) {
-    //     console.log("Called role choose");
-    //     $('.ed-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
-    //     $scope.choices.education = input;
-    // };
-    //
-    // $scope.placeChoose = function(input) {
-    //     console.log("Called role choose");
-    //     $('.place-drop').text(input.charAt(0).toUpperCase() + input.slice(1));
-    //     $scope.choices.place = input;
-    // };
 
 
 
